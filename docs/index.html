@@ -6,9 +6,9 @@
     <meta name="author" content="Travis Gerke" />
     <meta name="author" content="Garrick Aden-Buie" />
     <meta name="date" content="2020-08-28" />
-    <script src="libs/header-attrs/header-attrs.js"></script>
-    <link rel="stylesheet" href="moffitt-xaringan.css" type="text/css" />
-    <link rel="stylesheet" href="moffitt-xaringan-extra.css" type="text/css" />
+    <link rel="stylesheet" href="css/moffitt-xaringan.css" type="text/css" />
+    <link rel="stylesheet" href="css/moffitt-xaringan-extra.css" type="text/css" />
+    <link rel="stylesheet" href="css/weepeople.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -23,23 +23,18 @@ class: left bottom hide-count
 
 &lt;!-- &lt;div class="talk-logo"&gt;&lt;/div&gt; --&gt;
 
-.talk-meta[
-.talk-title[
-# Build your own universe
-
-Scale high-quality research data provisioning with R packages
-]
-
-.talk-author[
-Travis Gerke &amp;middot; Garrick Aden-Buie&lt;br&gt;
-.moffitt-gray[.small[.blue-medium[Moffitt Cancer Center ].blue[ :: ].blue-light[Health Informatics / Collaborative Data Services]]]
-]
-
-.talk-date.moffitt-gray[
-August 28, 2020
-]
-]
-
+<div class="talk-meta">
+<div class="talk-title">
+<h1>Build your own universe</h1>
+<p>Scale high-quality research data provisioning with R packages</p>
+</div>
+<div class="talk-author">
+Travis Gerke &amp;middot; Garrick Aden-Buie
+<br/>
+<span>.small[.blue-medium[Moffitt Cancer Center ].blue[ :: ].green[Health Informatics / Collaborative Data Services]]</span>
+</div>
+<div class="talk-date">August 28, 2020</div>
+</div>
 
 &lt;style type="text/css"&gt;
 /* Define title slide image or logo here */
@@ -56,6 +51,146 @@ August 28, 2020
 }
 &lt;/style&gt;
 
+---
+
+
+
+## How we do it
+
+&lt;style type="text/css"&gt;
+.people__row {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 4fr;
+	grid-gap: 1em;
+	align-items: center;
+}
+.people__row + .people__row {
+  margin-top: 2em;
+}
+.people__groups {
+  display: flex;
+  justify-content: space-around;
+}
+.people__group .weepeople {
+	font-size: 3em;
+}
+.people__group {
+	text-align: center;
+}
+.people__label {
+  color: #666;
+  font-family: Overpass;
+  line-height: 1;
+}
+.people__group__label {
+	text-align: center;
+}
+.people__group__label &gt; * {
+	margin-bottom: 0;
+	margin-top: 0;
+	margin-right: ;
+}
+
+/* fancy interactions */
+.people__label {
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.people__group .weepeople {
+  transition: all 0.4s ease-in-out;
+  filter: drop-shadow(0 0 1px rgba(0,0,0,0.2));
+}
+
+.people__group:hover .people__label {
+  overflow: ;
+  opacity: 1;
+}
+
+.people__group:hover .weepeople {
+  transform: scale(1.5);
+  filter: drop-shadow(-5px 5px 2px rgba(0,0,0,0.15));
+}
+&lt;/style&gt;
+
+
+
+&lt;div class="people__row"&gt;
+&lt;div class="people__group__label"&gt;
+&lt;svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="laptop-code" .class="svg-inline--fa fa-laptop-code fa-w-20" role="img" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" style="fill:currentColor;position:relative;display:inline-block;top:.1em;height:1.5em;"&gt;  &lt;path fill="currentColor" d="M255.03 261.65c6.25 6.25 16.38 6.25 22.63 0l11.31-11.31c6.25-6.25 6.25-16.38 0-22.63L253.25 192l35.71-35.72c6.25-6.25 6.25-16.38 0-22.63l-11.31-11.31c-6.25-6.25-16.38-6.25-22.63 0l-58.34 58.34c-6.25 6.25-6.25 16.38 0 22.63l58.35 58.34zm96.01-11.3l11.31 11.31c6.25 6.25 16.38 6.25 22.63 0l58.34-58.34c6.25-6.25 6.25-16.38 0-22.63l-58.34-58.34c-6.25-6.25-16.38-6.25-22.63 0l-11.31 11.31c-6.25 6.25-6.25 16.38 0 22.63L386.75 192l-35.71 35.72c-6.25 6.25-6.25 16.38 0 22.63zM624 416H381.54c-.74 19.81-14.71 32-32.74 32H288c-18.69 0-33.02-17.47-32.77-32H16c-8.8 0-16 7.2-16 16v16c0 35.2 28.8 64 64 64h512c35.2 0 64-28.8 64-64v-16c0-8.8-7.2-16-16-16zM576 48c0-26.4-21.6-48-48-48H112C85.6 0 64 21.6 64 48v336h512V48zm-64 272H128V64h384v256z"&gt;&lt;/path&gt;&lt;/svg&gt;
+&lt;h4&gt;Data Science&lt;/h4&gt;
+&lt;/div&gt;
+&lt;div class="people__groups"&gt;
+&lt;div class="people__group"&gt;
+&lt;div class="weepeople blue"&gt;A&lt;/div&gt;
+&lt;div class="people__label"&gt;Data Quality Analyst&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="people__group"&gt;
+&lt;div class="weepeople blue"&gt;bbb&lt;/div&gt;
+&lt;div class="people__label"&gt;Data Analyst&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="people__group"&gt;
+&lt;div class="weepeople blue"&gt;C&lt;/div&gt;
+&lt;div class="people__label"&gt;Scientific Programmer&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="people__group"&gt;
+&lt;div class="weepeople blue"&gt;eEe&lt;/div&gt;
+&lt;div class="people__label"&gt;Spoke-Level Honest&amp;nbsp;Broker&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="people__row"&gt;
+&lt;div class="people__group__label"&gt;
+&lt;svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="notes-medical" .class="svg-inline--fa fa-notes-medical fa-w-12" role="img" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg" style="fill:currentColor;position:relative;display:inline-block;top:.1em;height:1.5em;"&gt;  &lt;path fill="currentColor" d="M336 64h-80c0-35.3-28.7-64-64-64s-64 28.7-64 64H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48zM192 40c13.3 0 24 10.7 24 24s-10.7 24-24 24-24-10.7-24-24 10.7-24 24-24zm96 304c0 4.4-3.6 8-8 8h-56v56c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-56h-56c-4.4 0-8-3.6-8-8v-48c0-4.4 3.6-8 8-8h56v-56c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v56h56c4.4 0 8 3.6 8 8v48zm0-192c0 4.4-3.6 8-8 8H104c-4.4 0-8-3.6-8-8v-16c0-4.4 3.6-8 8-8h176c4.4 0 8 3.6 8 8v16z"&gt;&lt;/path&gt;&lt;/svg&gt;
+&lt;h4&gt;Abstraction&lt;/h4&gt;
+&lt;/div&gt;
+&lt;div class="people__groups"&gt;
+&lt;div class="people__group"&gt;
+&lt;div class="weepeople red"&gt;uuu&lt;/div&gt;
+&lt;div class="people__label"&gt;Database Abstractor&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="people__group"&gt;
+&lt;div class="weepeople red"&gt;qqq&lt;/div&gt;
+&lt;div class="people__label"&gt;Database Abstractor PRN&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div class="people__row"&gt;
+&lt;div class="people__group__label"&gt;
+&lt;svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="tasks" .class="svg-inline--fa fa-tasks fa-w-16" role="img" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="fill:currentColor;position:relative;display:inline-block;top:.1em;height:1.5em;"&gt;  &lt;path fill="currentColor" d="M139.61 35.5a12 12 0 0 0-17 0L58.93 98.81l-22.7-22.12a12 12 0 0 0-17 0L3.53 92.41a12 12 0 0 0 0 17l47.59 47.4a12.78 12.78 0 0 0 17.61 0l15.59-15.62L156.52 69a12.09 12.09 0 0 0 .09-17zm0 159.19a12 12 0 0 0-17 0l-63.68 63.72-22.7-22.1a12 12 0 0 0-17 0L3.53 252a12 12 0 0 0 0 17L51 316.5a12.77 12.77 0 0 0 17.6 0l15.7-15.69 72.2-72.22a12 12 0 0 0 .09-16.9zM64 368c-26.49 0-48.59 21.5-48.59 48S37.53 464 64 464a48 48 0 0 0 0-96zm432 16H208a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h288a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-320H208a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h288a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 160H208a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h288a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16z"&gt;&lt;/path&gt;&lt;/svg&gt;
+&lt;h4&gt;Management&lt;/h4&gt;
+&lt;/div&gt;
+&lt;div class="people__groups"&gt;
+&lt;div class="people__group"&gt;
+&lt;div class="weepeople green"&gt;O&lt;/div&gt;
+&lt;div class="people__label"&gt;Scientific Director&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="people__group"&gt;
+&lt;div class="weepeople green"&gt;M&lt;/div&gt;
+&lt;div class="people__label"&gt;Project Manager&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="people__group"&gt;
+&lt;div class="weepeople green"&gt;s&lt;/div&gt;
+&lt;div class="people__label"&gt;Regulatory Specialist&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="people__group"&gt;
+&lt;div class="weepeople green"&gt;P&lt;/div&gt;
+&lt;div class="people__label"&gt;Operations Supervisor&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="people__group"&gt;
+&lt;div class="weepeople green"&gt;Q&lt;/div&gt;
+&lt;div class="people__label"&gt;Core Facility Manager&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="people__group"&gt;
+&lt;div class="weepeople green"&gt;i&lt;/div&gt;
+&lt;div class="people__label"&gt;Staff Scientist&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

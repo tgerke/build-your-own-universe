@@ -4,12 +4,15 @@ subtitle: "Scale high-quality research data provisioning with R packages"
 author: 
   - Travis Gerke
   - Garrick Aden-Buie
-institute: ".small[.blue-medium[Moffitt Cancer Center ].blue[ :: ].blue-light[Health Informatics / Collaborative Data Services]]"
+institute: ".small[.blue-medium[Moffitt Cancer Center ].blue[ :: ].green[Health Informatics / Collaborative Data Services]]"
 date: 'August 28, 2020'
 output:
   xaringan::moon_reader:
     lib_dir: libs
-    css: [moffitt-xaringan.css, moffitt-xaringan-extra.css]
+    css: 
+      - css/moffitt-xaringan.css
+      - css/moffitt-xaringan-extra.css
+      - css/weepeople.css
     seal: false
     nature:
       titleSlideClass: ["bottom", "left"]
@@ -40,23 +43,28 @@ class: left bottom hide-count
 
 <!-- <div class="talk-logo"></div> -->
 
-.talk-meta[
-.talk-title[
-# `r rmarkdown::metadata$title`
-
-`r rmarkdown::metadata$subtitle`
-]
-
-.talk-author[
-`r paste(rmarkdown::metadata$author, collapse = " &middot; ")`<br>
-.moffitt-gray[`r paste(rmarkdown::metadata$institute, collapse = ", ")`]
-]
-
-.talk-date.moffitt-gray[
-`r knitr::knit(text = rmarkdown::metadata$date)`
-]
-]
-
+```{r echo=FALSE, message = FALSE, warning = FALSE}
+htmltools::withTags(
+  div(
+    class = "talk-meta",
+    div(
+      class = "talk-title",
+      h1(rmarkdown::metadata$title),
+      p(rmarkdown::metadata$subtitle)
+    ),
+    div(
+      class = "talk-author",
+      paste(rmarkdown::metadata$author, collapse = " &middot; "),
+      br(),
+      span(paste(rmarkdown::metadata$institute, collapse = ", "))
+    ),
+    div(
+      class = "talk-date",
+      knitr::knit(text = rmarkdown::metadata$date, quiet = TRUE)
+    )
+  )
+)
+```
 
 ```{css echo=FALSE}
 /* Define title slide image or logo here */
@@ -73,3 +81,7 @@ class: left bottom hide-count
 }
 ```
 
+---
+
+```{r slides-people-overview, child="slides_people-overview.Rmd"}
+```

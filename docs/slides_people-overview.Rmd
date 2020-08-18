@@ -1,0 +1,145 @@
+
+## How we do it
+
+```{css people-css, echo=FALSE}
+.people__row {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 4fr;
+	grid-gap: 1em;
+	align-items: center;
+}
+.people__row + .people__row {
+  margin-top: 2em;
+}
+.people__groups {
+  display: flex;
+  justify-content: space-around;
+}
+.people__group .weepeople {
+	font-size: 3em;
+}
+.people__group {
+	text-align: center;
+}
+.people__label {
+  color: #666;
+  font-family: Overpass;
+  line-height: 1;
+}
+.people__group__label {
+	text-align: center;
+}
+.people__group__label > * {
+	margin-bottom: 0;
+	margin-top: 0;
+	margin-right: ;
+}
+
+/* fancy interactions */
+.people__label {
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.people__group .weepeople {
+  transition: all 0.4s ease-in-out;
+  filter: drop-shadow(0 0 1px rgba(0,0,0,0.2));
+}
+
+.people__group:hover .people__label {
+  overflow: ;
+  opacity: 1;
+}
+
+.people__group:hover .weepeople {
+  transform: scale(1.5);
+  filter: drop-shadow(-5px 5px 2px rgba(0,0,0,0.15));
+}
+```
+
+```{r icons_scaled, echo=FALSE, include=FALSE}
+icon_scaled <- function(name) {
+  icons <- icon::icon_set("figures/icons/")
+  icon::icon_style(
+    scale = 1.5,
+    icons(name)
+  )
+}
+```
+
+<div class="people__row">
+<div class="people__group__label">
+`r icon_scaled("laptop-code-solid")`
+<h4>Data Science</h4>
+</div>
+<div class="people__groups">
+<div class="people__group">
+<div class="weepeople blue">A</div>
+<div class="people__label">Data Quality Analyst</div>
+</div>
+<div class="people__group">
+<div class="weepeople blue">bbb</div>
+<div class="people__label">Data Analyst</div>
+</div>
+<div class="people__group">
+<div class="weepeople blue">C</div>
+<div class="people__label">Scientific Programmer</div>
+</div>
+<div class="people__group">
+<div class="weepeople blue">eEe</div>
+<div class="people__label">Spoke-Level Honest&nbsp;Broker</div>
+</div>
+</div>
+</div>
+
+<div class="people__row">
+<div class="people__group__label">
+`r icon_scaled("notes-medical-solid")`
+<h4>Abstraction</h4>
+</div>
+<div class="people__groups">
+<div class="people__group">
+<div class="weepeople red">uuu</div>
+<div class="people__label">Database Abstractor</div>
+</div>
+<div class="people__group">
+<div class="weepeople red">qqq</div>
+<div class="people__label">Database Abstractor PRN</div>
+</div>
+</div>
+</div>
+
+
+<div class="people__row">
+<div class="people__group__label">
+`r icon_scaled("tasks-solid")`
+<h4>Management</h4>
+</div>
+<div class="people__groups">
+<div class="people__group">
+<div class="weepeople green">O</div>
+<div class="people__label">Scientific Director</div>
+</div>
+<div class="people__group">
+<div class="weepeople green">M</div>
+<div class="people__label">Project Manager</div>
+</div>
+<div class="people__group">
+<div class="weepeople green">s</div>
+<div class="people__label">Regulatory Specialist</div>
+</div>
+<div class="people__group">
+<div class="weepeople green">P</div>
+<div class="people__label">Operations Supervisor</div>
+</div>
+<div class="people__group">
+<div class="weepeople green">Q</div>
+<div class="people__label">Core Facility Manager</div>
+</div>
+<div class="people__group">
+<div class="weepeople green">i</div>
+<div class="people__label">Staff Scientist</div>
+</div>
+</div>
+</div>
