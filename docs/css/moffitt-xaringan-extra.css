@@ -120,26 +120,29 @@ kbd {
   text-align: left;
   bottom: 20px;
   left: 64px;
+  color: #444;
 }
 .talk-title h1 {
   margin-top: 0;
   margin-bottom: 20px;
+  font-weight: 600;
 }
-.talk-meta p {
+.talk-title p {
   margin-top: 0;
-  margin-bottom: 40px;
 }
 .talk-author {
   color: #444;
   font-weight: bold;
   font-size: 1.5em;
   line-height: 1em;
+  font-weight: 300;
+  margin: 1em auto;
 }
 .talk-date {
-  font-size: 1.25em;
-  line-height: 0;
+  font-size: 1em;
+  font-weight: 300;
+  color: #999 ;
 }
-
 /* Moffitt Slide Color Bar */
 .moffitt-slide-border::after,
 .remark-slide-content:not(.no-border):not(.inverse):not(.title)::after {
