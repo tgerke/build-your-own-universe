@@ -105,3 +105,8 @@ htmltools::withTags(
 
 ```{r slides-people-overview, child="slides_people-overview.Rmd"}
 ```
+
+---
+
+```{r slides-scaling-code, child="slides_scaling-access.Rmd"}
+```

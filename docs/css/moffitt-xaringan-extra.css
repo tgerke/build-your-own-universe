@@ -47,7 +47,7 @@ blockquote {
   font-style: normal;
   color: #777;
 }
-.smaller {
+.smaller, .smaller .remark-code {
   font-size: 0.5rem;
 }
 .small {

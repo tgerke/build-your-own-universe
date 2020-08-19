@@ -1,0 +1,198 @@
+
+### Just use this SQL code...
+
+```{css echo=FALSE}
+.code-two-column .remark-code {
+  font-size: 0.33em;
+	-webkit-column-count: 2;
+	-moz-column-count: 2;
+	column-count: 2;
+	-webkit-column-gap: 20px;
+	-moz-column-gap: 20px;
+	column-gap: 20px;
+}
+```
+
+.code-two-column[
+```{sql example-query, eval=FALSE}
+SELECT SA.PERSON_ID,SA.SAMPLE_ID,SA.SAMPLE_FAMILY_ID
+,CH1.CHOICE_NAME AS COLLECTION_CONSORTIUM 
+,CH2.CHOICE_NAME AS CELFILE_RELATED
+,CH3.CHOICE_NAME AS FROZEN_TUMOR_TISSUE
+,CH4.CHOICE_NAME AS FROZEN_NORMAL_TISSUE
+,CH5.CHOICE_NAME AS WHOLE_BLOOD
+,CH6.CHOICE_NAME AS BUFFY_COAT
+,CH7.CHOICE_NAME AS DNA_FROM_BLOOD
+,CH8.CHOICE_NAME AS PLASMA
+,CH9.CHOICE_NAME AS SERUM
+,CH10.CHOICE_NAME AS PARAFFIN
+,CH11.CHOICE_NAME AS URINE
+,CH12.CHOICE_NAME AS RNA
+,CH13.CHOICE_NAME AS MNC
+,CH14.CHOICE_NAME AS DNA_FROM_SOLID
+,CH15.CHOICE_NAME AS ADJACENT_NORMAL
+,CH16.CHOICE_NAME AS LCS_PROTOCOL_BLOOD_AVA
+,CH17.CHOICE_NAME AS SOO_CATEGORY
+,CH36.CHOICE_NAME AS SOO_TISSUETYPE
+,CH19.CHOICE_NAME AS HISTOLOGYCAP
+,CH20.CHOICE_NAME AS PRIMARY_METASTATIC
+,PI.MEDICAL_ID
+,PI.PARTNER_ID
+,CH21.Anatomic_Site AS SOO_ANATOMICSITE
+,CH22.CHOICE_NAME AS GROSS_DIAGNOSIS
+,CH23.CHOICE_NAME AS PRIMARY_SITE_PATIENT
+,CH24.CHOICE_NAME AS HISTOLOGY_PATIENT
+,CH25.CHOICE_NAME AS DERIVED_CATEGORY
+,CH27.CHOICE_NAME AS DERIVED_TISSUETYPE
+,SA.DERIVED_ANATOMIC_SITE AS DERIVED_ANATOMICSITE
+,CH29.TISSUE_TYPE AS COL_SITE_TISSUE_TYPE
+,SA.SPECIMEN_COLLECTION_DATE
+,CH29.ANATOMIC_SITE AS COL_SITE_ANATOMIC
+,CH30.CHOICE_NAME AS COL_SITE_CATEGORY
+,SA.BIOBANKING_SUBJECT_ID AS SUBJECT_ID
+,CH31.CHOICE_NAME AS WHOLE_EXOME
+,CH32.CHOICE_NAME AS TARGET_EXOME
+,CH33.CHOICE_NAME AS SAMPLE_TYPE
+,SA.CURRENT_QUANTITY
+,CH34.CHOICE_NAME AS PATH_DIAGNOSIS_PQC
+,SA.SAMPLE_TO_CANR_CHAR_LINK
+,CH35.CHOICE_NAME AS PROTOCOL
+
+FROM ABC.SAMPLE SA
+LEFT JOIN ABC.CHOICE CH1 ON SA.COLLECTION_FACILITY = CH1.CHOICE_ID and ch1.is_deleted=0
+LEFT JOIN ABC.CHOICE CH2 ON SA.CELFILE_RELATED = CH2.CHOICE_ID and ch2.is_deleted=0
+LEFT JOIN ABC.PATIENT_INFO PI ON SA.PARTY_ID = PI.PARTY_ID and pi.isdeleted = 0
+LEFT JOIN ABC.SAMPLE_INDICATOR SI ON SA.SAMPLE_KEY = SI.SAMPLE_KEY and si.isdeleted = 0
+LEFT JOIN ABC.CHOICE CH3 ON SI.FROZ_TTISE_AVL_FOR_RIND = CH3.CHOICE_ID and ch3.is_deleted=0
+LEFT JOIN ABC.CHOICE CH4 ON SI.FROZ_NORM_TISS_AVL_FOR_RIND = CH4.CHOICE_ID and ch4.is_deleted=0
+LEFT JOIN ABC.CHOICE CH5 ON SI.WHLBAVLFDNAEXTNDR_INCL_PAXDNAS = CH5.CHOICE_ID and ch5.is_deleted=0
+LEFT JOIN ABC.CHOICE CH6 ON SI.BUFY_COAT_AVL_FOR_RIND = CH6.CHOICE_ID and ch6.is_deleted=0
+LEFT JOIN ABC.CHOICE CH7 ON SI.DNAEXTRF_BLOD_AVL_FOR_RIND = CH7.CHOICE_ID and ch7.is_deleted=0
+LEFT JOIN ABC.CHOICE CH8 ON SI.PLA_AVL_FOR_RIND = CH8.CHOICE_ID and ch8.is_deleted=0
+LEFT JOIN ABC.CHOICE CH9 ON SI.SER_AVL_FOR_RIND = CH9.CHOICE_ID and ch9.is_deleted=0
+LEFT JOIN ABC.CHOICE CH10 ON SI.PARAF_BLK_AVL_FOR_RIND = CH10.CHOICE_ID and ch10.is_deleted=0
+LEFT JOIN ABC.CHOICE CH11 ON SI.UNINE_AVL_FOR_RIND = CH11.CHOICE_ID and ch11.is_deleted=0
+LEFT JOIN ABC.CHOICE CH12 ON SI.RNAEXTRF_SOLID_TTISE_FOR_RIND = CH12.CHOICE_ID and ch12.is_deleted=0
+LEFT JOIN ABC.CHOICE CH13 ON SI.MONO_CELS_EXTR_FOR_RIND = CH13.CHOICE_ID and ch13.is_deleted=0
+LEFT JOIN ABC.CHOICE CH14 ON SI.DNAEXTRF_SOLID_TTISE_FOR_RIND = CH14.CHOICE_ID and ch14.is_deleted=0
+LEFT JOIN ABC.CHOICE CH15 ON SI.ADJA_NSLD_SAMPLE_AVL_INDR = CH15.CHOICE_ID and ch15.is_deleted=0
+LEFT JOIN ABC.CHOICE CH16 ON SI.LCS_PROTC_BLOD_AVL_FOR_RIND = CH16.CHOICE_ID and ch16.is_deleted=0
+LEFT JOIN ABC.CHOICE CH17 ON SA.DERIVED_SOO_CATEGORY = CH17.CHOICE_ID and ch17.is_deleted=0
+LEFT JOIN ABC.CHOICE CH18 ON SA.DERIVED_SOO_TISSUE_TYPE = CH18.CHOICE_ID and ch18.is_deleted=0
+LEFT JOIN ABC.CHOICE CH19 ON SA.HISTOLOGY_TYPE_CONFORMED_CAP = CH19.CHOICE_ID and ch19.is_deleted=0
+LEFT JOIN ABC.CHOICE CH20 ON SA.DERIVED_PRIMARY_VS_METASTATIC = CH20.CHOICE_ID and ch20.is_deleted=0
+LEFT JOIN ABC.TISSUE_TYPE CH21 ON SUBSTR(SA.DERIVED_SOO_ANATOMIC_SITE,0,8) = CH21.TISSUE_TYPE_KEY and ch21.isdeleted=0
+LEFT JOIN ABC.CHOICE CH22 ON SA.DERIVED_GROSS_DIAGNOSIS = CH22.CHOICE_ID and ch22.is_deleted=0
+LEFT JOIN ABC.CHOICE CH23 ON SA.PRIMARY_SITE_PATIENT = CH23.CHOICE_ID and ch23.is_deleted=0
+LEFT JOIN ABC.CHOICE CH24 ON SA.HISTOLOGY_PATIENT = CH24.CHOICE_ID and ch24.is_deleted=0
+LEFT JOIN ABC.CHOICE CH25 ON SA.DERIVED_CATEGORY = CH25.CHOICE_ID and ch25.is_deleted=0
+LEFT JOIN ABC.CHOICE CH26 ON SA.DERIVED_TISSUE_TYPE = CH26.CHOICE_ID and ch26.is_deleted=0
+LEFT JOIN ABC.CHOICE CH27 ON SA.DERIVED_TISSUE_TYPE = CH27.CHOICE_ID and ch27.is_deleted=0
+LEFT JOIN ABC.CHOICE CH28 ON SA.COLLECTION_SITE_TISSUE_TYPE = CH28.CHOICE_ID and ch28.is_deleted=0
+LEFT JOIN ABC.TISSUE_TYPE CH29 ON SA.COLLECTION_SITE_ANATOMIC = CH29.TISSUE_TYPE_KEY and ch29.isdeleted=0
+LEFT JOIN ABC.CHOICE CH30 ON SA.COLLECTION_SITE_CATEGORY = CH30.CHOICE_ID and ch30.is_deleted=0
+LEFT JOIN ABC.CHOICE CH31 ON SI.WHL_EXOM_SEQ_AVL_INDR = CH31.CHOICE_ID and ch31.is_deleted=0
+LEFT JOIN ABC.CHOICE CH32 ON SI.TAR_EXOM_SEQ_AVL_INDR = CH32.CHOICE_ID and ch32.is_deleted=0
+LEFT JOIN ABC.CHOICE CH33 ON SA.SAMPLE_TYPE = CH33.CHOICE_ID and ch33.is_deleted=0
+LEFT JOIN ABC.CHOICE CH34 ON SA.PATH_DIAGNOSIS_PQC = CH34.CHOICE_ID AND CH34.IS_DELETED = 0
+LEFT JOIN ABC.CHOICE CH35 ON SA.PROTOCOL = CH35.CHOICE_ID AND CH35.IS_DELETED = 0
+LEFT JOIN ABC.CHOICE CH36 ON SA.DERIVED_SOO_TISSUE_TYPE = CH36.CHOICE_ID AND CH36.IS_DELETED=0
+
+WHERE SA.ISDELETED = 0
+```
+]
+
+---
+class: no-logo no-border hide-count word-doc
+
+```{css echo=FALSE}
+.word-doc {
+  background-image: url('figures/word-doc.png');
+  background-size: cover;
+  overflow: hidden;
+  height: 100%;
+  padding-top: 5em;
+}
+
+.word-doc pre {
+  max-height: 66%;
+  overflow: hidden;
+  position: absolute;
+  width: 90%;
+}
+
+.word-doc pre code.sql {
+  background: white;
+  font-family: sans-serif;
+}
+
+#sql-font-size-down {
+	background: transparent;
+	width: 35px;
+	height: 30px;
+	position: absolute;
+	top: 77px;
+	left: 404px;
+	border: none;
+	cursor: pointer;
+}
+#sql-font-size-up {
+	background: transparent;
+	width: 35px;
+	height: 30px;
+	position: absolute;
+	top: 77px;
+	left: 365px;
+	border: none;
+	cursor: pointer;
+}
+#sql-font-comic-sans {
+  background: transparent;
+  text-align: center;
+  width: 125px;
+  height: 30px;
+  position: absolute;
+  top: 77px;
+  left: 138px;
+  border: none;
+  cursor: pointer;
+  font-size: 21px;
+}
+```
+
+<button id="sql-font-comic-sans" type="button"></button>
+<button id="sql-font-size-up" type="button"></button>
+<button id="sql-font-size-down" type="button"></button>
+
+```{sql ref.label="example-query", eval=FALSE}
+```
+
+```{js echo=FALSE}
+(function() {
+  const btnDown = document.getElementById('sql-font-size-down')
+  const btnUp = document.getElementById('sql-font-size-up')
+  const btnFont = document.getElementById('sql-font-comic-sans')
+  const code = document.querySelector('.word-doc pre code')
+  let size = 100
+  code.style.fontSize = size + '%'
+  btnDown.addEventListener('click', function() {
+    if (size <= 10) return;
+    size = size - 10
+    code.style.fontSize = size + '%'
+  })
+  btnUp.addEventListener('click', function() {
+    if (size >= 100) return;
+    size = size + 10
+    code.style.fontSize = size + '%'
+  })
+  btnFont.addEventListener('click', function(ev) {
+    if (btnFont.innerText === '') {
+      btnFont.innerText = 'Comic Sans'
+      code.style.fontFamily = '"Comic Sans MS", cursive, sans-serif'
+    } else {
+      btnFont.innerText = ''
+      code.style.fontFamily = 'sans-serif'
+    }
+  })
+})()
+```
