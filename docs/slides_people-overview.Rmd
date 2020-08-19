@@ -56,6 +56,15 @@
   transform: scale(1.5);
   filter: drop-shadow(-5px 5px 2px rgba(0,0,0,0.15));
 }
+
+.people__row:hover .people__group__label {
+  opacity: 1;
+}
+
+.people__group__label {
+  opacity: 0.5;
+  transition: opacity 0.25s;
+}
 ```
 
 ```{r icons_scaled, echo=FALSE, include=FALSE}
