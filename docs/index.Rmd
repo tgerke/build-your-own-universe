@@ -102,6 +102,15 @@ htmltools::withTags(
 .talk-date {
   font-size: 0.8em;
 }
+
+.blueprint1 {
+  background-image: url('figures/star-trek-blueprint-1.jpg');
+  background-size: cover;
+}
+.blueprint2 {
+  background-image: url('figures/star-trek-blueprint-2.jpg');
+  background-size: cover;
+}
 ```
 
 ---
