@@ -11,6 +11,7 @@
     <link href="libs/animate.css/animate.min.css" rel="stylesheet" />
     <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
     <script src="libs/tile-view/tile-view.js"></script>
+    <script src="https://unpkg.com/leader-line@1.0.5/leader-line.min.js"></script>
     <link rel="stylesheet" href="css/moffitt-xaringan.css" type="text/css" />
     <link rel="stylesheet" href="css/moffitt-xaringan-extra.css" type="text/css" />
     <link rel="stylesheet" href="css/weepeople.css" type="text/css" />
@@ -1113,6 +1114,7 @@ Let's take a look at what this query might look like
 in an alternate universe...
 
 ---
+class: middle
 
 
 ```r
@@ -1130,6 +1132,201 @@ samples %&gt;%
   abc_choice_replace() %&gt;% 
   abs_not_deleted()
 ```
+
+
+---
+class: middle
+
+.remark-code.pa2.gray-4[
+library(moffittverse)&lt;br&gt;&lt;br&gt;
+use_backend("abc")&lt;br&gt;&lt;br&gt;
+samples&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_inventory")&lt;br&gt;
+patients&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("patient")&lt;br&gt;
+sample_ind&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_indicators")&lt;br&gt;&lt;br&gt;
+samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;left_join(sample_ind,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"SAMPLE_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;left_join(patients,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"PERSON_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;abc_choice_replace()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;abs_not_deleted()
+]
+
+
+---
+class: middle
+
+&lt;style type="text/css"&gt;
+.leader-line {
+  z-index: 100;
+}
+[class^="leader-start"] {
+  color: var(--orange);
+  font-size: 1.1em;
+  top: 45%;
+  right: 0;
+  width: 450px;
+  margin: 0;
+  position: absolute;
+  text-align: center;
+}
+&lt;/style&gt;
+
+.remark-code.pa2.gray-4[
+.leader-end-1.gray-1[library(moffittverse)]&lt;br&gt;&lt;br&gt;
+use_backend("abc")&lt;br&gt;&lt;br&gt;
+samples&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_inventory")&lt;br&gt;
+patients&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("patient")&lt;br&gt;
+sample_ind&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_indicators")&lt;br&gt;&lt;br&gt;
+samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;left_join(sample_ind,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"SAMPLE_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;left_join(patients,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"PERSON_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;abc_choice_replace()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;abs_not_deleted()
+]
+
+&lt;div class="leader-start-1 animated-slide fadeIn"&gt;Our universe&lt;/div&gt;
+
+&lt;script type="text/javascript"&gt;
+function connectElements(i, startSocket = 'top', endSocket = 'auto') {
+  let start = document.querySelector(`.remark-slides-area .leader-start-${i}`)
+  let end = document.querySelector(`.remark-slides-area .leader-end-${i}`)
+  start.line = new LeaderLine(start, end, {hide: true})
+  start.line.setOptions({startSocket, endSocket})
+  return start.line
+}
+
+connectElements(1)
+
+slideshow.on('hideSlide', function(slide) {
+  let idx = slide.getSlideIndex()
+  slides = document.querySelectorAll('.remark-slides-area .remark-slide-container')
+  let thisSlide = slides[idx]
+  let lineLeaders = thisSlide.querySelectorAll('[class^="leader-start"]')
+  if (lineLeaders.length) {
+    lineLeaders.forEach(el =&gt; el.line.hide('none'))
+  }
+})
+
+slideshow.on('showSlide', function(slide) {
+  let idx = slide.getSlideIndex()
+  slides = document.querySelectorAll('.remark-slides-area .remark-slide-container')
+  let thisSlide = slides[idx]
+  let lineLeaders = thisSlide.querySelectorAll('[class^="leader-start"]')
+  if (lineLeaders.length) {
+    lineLeaders.forEach(el =&gt; el.line.show('draw'))
+  }
+})
+&lt;/script&gt;
+
+---
+class: middle
+
+.remark-code.pa2.gray-4[
+library(moffittverse)&lt;br&gt;&lt;br&gt;
+.leader-end-2.gray-1[use_backend("abc")]&lt;br&gt;&lt;br&gt;
+samples&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_inventory")&lt;br&gt;
+patients&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("patient")&lt;br&gt;
+sample_ind&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_indicators")&lt;br&gt;&lt;br&gt;
+samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;left_join(sample_ind,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"SAMPLE_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;left_join(patients,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"PERSON_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;abc_choice_replace()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;abs_not_deleted()
+]
+
+&lt;div class="leader-start-2 animated-slide fadeIn"&gt;Standardized,&lt;br&gt; managed connections&lt;/div&gt;
+
+&lt;script type="text/javascript"&gt;
+connectElements(2)
+&lt;/script&gt;
+
+---
+class: middle
+
+&lt;style type="text/css"&gt;
+.leader-start-3 {
+  top: 25%;
+}
+&lt;/style&gt;
+
+.remark-code.pa2.gray-4.w-60[
+library(moffittverse)&lt;br&gt;&lt;br&gt;
+use_backend("abc")&lt;br&gt;&lt;br&gt;
+.leader-end-3.gray-1[samples&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_inventory")]&lt;br&gt;
+.gray-1[patients&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("patient")]&lt;br&gt;
+.gray-1[sample_ind&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_indicators")]&lt;br&gt;&lt;br&gt;
+samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;left_join(sample_ind,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"SAMPLE_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;left_join(patients,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"PERSON_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;abc_choice_replace()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;abs_not_deleted()
+]
+
+&lt;div class="leader-start-3 animated-slide fadeIn"&gt;Easy schema/table access&lt;/div&gt;
+
+&lt;script type="text/javascript"&gt;
+connectElements(3, 'bottom')
+&lt;/script&gt;
+
+
+---
+class: middle
+
+&lt;style type="text/css"&gt;
+.leader-start-4 {
+  top: 25%;
+  color: var(--gray);
+}
+&lt;/style&gt;
+
+.remark-code.pa2.gray-4.w-60[
+library(moffittverse)&lt;br&gt;&lt;br&gt;
+use_backend("abc")&lt;br&gt;&lt;br&gt;
+samples&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_inventory")&lt;br&gt;
+patients&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("patient")&lt;br&gt;
+sample_ind&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_indicators")&lt;br&gt;&lt;br&gt;
+.gray-1[.red.b[samples]&amp;nbsp;%&amp;gt;%&amp;nbsp;]&lt;br&gt;
+.leader-end-4.gray-1[&amp;nbsp;&amp;nbsp;left_join(sample_ind,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"SAMPLE_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;]&lt;br&gt;
+.gray-1[&amp;nbsp;&amp;nbsp;left_join(.purple.b[patients],&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"PERSON_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;]&lt;br&gt;
+&amp;nbsp;&amp;nbsp;abc_choice_replace()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;abs_not_deleted()
+]
+
+&lt;div class="leader-start-4 animated-slide fadeIn"&gt;Connect&lt;br&gt;&lt;span class="red"&gt;samples&lt;/span&gt; to &lt;span class="purple"&gt;patients&lt;/span&gt;&lt;/div&gt;
+
+&lt;script type="text/javascript"&gt;
+connectElements(4, 'bottom')
+&lt;/script&gt;
+
+---
+class: middle
+
+&lt;style type="text/css"&gt;
+.leader-start-5 {
+  /* top: 25%; */
+}
+&lt;/style&gt;
+
+.remark-code.pa2.gray-4[
+library(moffittverse)&lt;br&gt;&lt;br&gt;
+use_backend("abc")&lt;br&gt;&lt;br&gt;
+samples&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_inventory")&lt;br&gt;
+patients&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("patient")&lt;br&gt;
+sample_ind&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_indicators")&lt;br&gt;&lt;br&gt;
+samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;left_join(sample_ind,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"SAMPLE_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;left_join(patients,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"PERSON_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+.gray-1[&amp;nbsp;&amp;nbsp;abc_choice_replace()&amp;nbsp;%&amp;gt;%&amp;nbsp;]&lt;br&gt;
+.leader-end-5.gray-1[&amp;nbsp;&amp;nbsp;abs_not_deleted()]
+]
+
+&lt;div class="leader-start-5 animated-slide fadeIn"&gt;Tedious, annoying,&lt;br&gt;or error prone&lt;/div&gt;
+
+&lt;script type="text/javascript"&gt;
+(function() {
+  let line5 = connectElements(5, 'bottom')
+  line5.path = 'arc'
+})()
+&lt;/script&gt;
   
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
