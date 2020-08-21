@@ -113,7 +113,7 @@ class: center middle
 
 .center.w-50[
 .bubble.thought.vanishIn[
-How do I connect to our .blue[tissue sample inventory] to a patient's .orange[clinical data]?
+How do I connect our .blue[tissue sample inventory] to a patient's .orange[clinical data]?
 ]
 
 .tr.f6[
