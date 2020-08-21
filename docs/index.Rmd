@@ -23,6 +23,10 @@ output:
       countIncrementalSlides: true
 ---
 
+name: title
+class: left bottom hide-count
+
+
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 knitr::opts_chunk$set(
@@ -36,11 +40,17 @@ knitr::opts_chunk$set(
 )
 ```
 
-name: title
-class: left bottom hide-count
+```{r library, echo=FALSE}
+source("library.R")
+```
+
+```{r extras, echo=FALSE}
+moffittdocs::use_moffitt_tachyons()
+xaringanExtra::use_animate_css(TRUE, xaringan = FALSE)
+xaringanExtra::use_tile_view()
+```
 
 <!-- Title Slide -->
-
 
 ```{r title-slides, echo=FALSE, message = FALSE, warning = FALSE}
 htmltools::withTags(
@@ -99,6 +109,23 @@ htmltools::withTags(
   background-image: url('figures/star-trek-blueprint-2.jpg');
   background-size: cover;
 }
+
+hr {
+ box-sizing:content-box;
+ height:3px;
+ overflow:visible;
+ border: none;
+ background: var(--moffitt-gray);
+}
+
+.remark-container {
+  background: white;
+}
+.remark-slide-scaler {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  outline: 2px solid #eee;
+}
 ```
 
 ---
@@ -110,3 +137,4 @@ htmltools::withTags(
 
 ```{r slides-scaling-code, child="slides_scaling-access.Rmd"}
 ```
+  

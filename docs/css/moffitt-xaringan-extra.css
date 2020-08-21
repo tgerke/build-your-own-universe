@@ -143,6 +143,15 @@ kbd {
   font-weight: 300;
   color: #999 ;
 }
+
+.remark-visible .animated-slide,
+.remark-fading .animated-slide {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
 /* Moffitt Slide Color Bar */
 .moffitt-slide-border::after,
 .remark-slide-content:not(.no-border):not(.inverse):not(.title)::after {
