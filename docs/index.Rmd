@@ -13,6 +13,8 @@ output:
       - css/moffitt-xaringan.css
       - css/moffitt-xaringan-extra.css
       - css/weepeople.css
+    includes:
+      in_header: head.html
     seal: false
     nature:
       titleSlideClass: ["bottom", "left"]
