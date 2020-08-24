@@ -1114,30 +1114,31 @@ Let's take a look at what this query might look like
 in an alternate universe...
 
 ---
-class: middle
 
 
-```r
-library(moffittverse)
+.remark-code.code-example.pa2[
+.purple[library](moffittverse)&lt;br&gt;&lt;br&gt;
+use_backend(.green["abc"])&lt;br&gt;&lt;br&gt;
+samples&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl(.green["sample_inventory"])&lt;br&gt;
+patients&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl(.green["patient"])&lt;br&gt;
+sample_ind&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl(.green["sample_indicators"])&lt;br&gt;&lt;br&gt;
+samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;left_join(sample_ind,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;.green["SAMPLE_ID"])&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;left_join(patients,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;.green["PERSON_ID"])&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;abc_choice_replace()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;abc_not_deleted()
+]
 
-use_backend("abc")
+???
 
-samples    &lt;- abc_tbl("sample_inventory")
-patients   &lt;- abc_tbl("patient")
-sample_ind &lt;- abc_tbl("sample_indicators")
-
-samples %&gt;% 
-  left_join(sample_ind, by = "SAMPLE_ID") %&gt;% 
-  left_join(patients, by = "PERSON_ID") %&gt;% 
-  abc_choice_replace() %&gt;% 
-  abs_not_deleted()
-```
-
+Here's the same query,  
+rewritten using a blend of `dplyr`  
+and custom functions that support our particular setup
 
 ---
-class: middle
 
-.remark-code.pa2.gray-4[
+
+.remark-code.code-example.pa2.gray-4[
 library(moffittverse)&lt;br&gt;&lt;br&gt;
 use_backend("abc")&lt;br&gt;&lt;br&gt;
 samples&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_inventory")&lt;br&gt;
@@ -1147,30 +1148,47 @@ samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(sample_ind,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"SAMPLE_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(patients,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"PERSON_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;abc_choice_replace()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
-&amp;nbsp;&amp;nbsp;abs_not_deleted()
+&amp;nbsp;&amp;nbsp;abc_not_deleted()
 ]
 
+???
+
+We call our universe _moffittverse_.
+
+Very much inspired by the _tidyverse_,  
+where a single `library(moffittverse)`  
+loads a common set of packages  
+that we use for nearly every data request.
 
 ---
-class: middle
 
 &lt;style type="text/css"&gt;
+.code-example {
+  position: absolute;
+  top: 100px;
+}
 .leader-line {
   z-index: 100;
 }
 [class^="leader-start"] {
   color: var(--orange);
   font-size: 1.1em;
-  top: 45%;
-  right: 0;
   width: 450px;
   margin: 0;
   position: absolute;
   text-align: center;
 }
+.leader-start-1 {
+  top: 10%;
+  right: 30%;
+}
+.leader-start-2 {
+  top: 15%;
+  right: 20%;
+}
 &lt;/style&gt;
 
-.remark-code.pa2.gray-4[
+.remark-code.code-example.pa2.gray-4[
 .leader-end-1.gray-1[library(moffittverse)]&lt;br&gt;&lt;br&gt;
 use_backend("abc")&lt;br&gt;&lt;br&gt;
 samples&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_inventory")&lt;br&gt;
@@ -1180,7 +1198,7 @@ samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(sample_ind,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"SAMPLE_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(patients,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"PERSON_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;abc_choice_replace()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
-&amp;nbsp;&amp;nbsp;abs_not_deleted()
+&amp;nbsp;&amp;nbsp;abc_not_deleted()
 ]
 
 &lt;div class="leader-start-1 animated-slide fadeIn"&gt;Our universe&lt;/div&gt;
@@ -1189,12 +1207,17 @@ samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 function connectElements(i, startSocket = 'top', endSocket = 'auto') {
   let start = document.querySelector(`.remark-slides-area .leader-start-${i}`)
   let end = document.querySelector(`.remark-slides-area .leader-end-${i}`)
-  start.line = new LeaderLine(start, end, {hide: true})
+  start.line = new LeaderLine(start, end, {
+    hide: !start.closest('.remark-slide-container').classList.contains('remark-visible')
+  })
   start.line.setOptions({startSocket, endSocket})
+  let lineEl = document.querySelector('body &gt; svg.leader-line')
+  let slide = start.closest('.remark-slides-area')
+  slide.appendChild(lineEl)
   return start.line
 }
 
-connectElements(1)
+connectElements(1, 'bottom')
 
 slideshow.on('hideSlide', function(slide) {
   let idx = slide.getSlideIndex()
@@ -1206,21 +1229,81 @@ slideshow.on('hideSlide', function(slide) {
   }
 })
 
-slideshow.on('showSlide', function(slide) {
+slideshow.on('afterShowSlide', function(slide) {
   let idx = slide.getSlideIndex()
   slides = document.querySelectorAll('.remark-slides-area .remark-slide-container')
   let thisSlide = slides[idx]
   let lineLeaders = thisSlide.querySelectorAll('[class^="leader-start"]')
   if (lineLeaders.length) {
-    lineLeaders.forEach(el =&gt; el.line.show('draw'))
+    lineLeaders.forEach(function(el) {
+      el.line.position()
+      el.line.show('draw')
+    })
   }
 })
+
+window.addEventListener('resize', function() {
+  document
+    .querySelectorAll('.remark-slides-area [class^="leader-start"]')
+    .forEach(el =&gt; el.line.position())
+});
 &lt;/script&gt;
 
----
-class: middle
+???
 
-.remark-code.pa2.gray-4[
+Most of the packages are from the tidyverse,
+
+but we also include our own supporting package: `moffittCDS`  
+specifically tailored to my team's workflow.
+
+---
+
+&lt;style type="text/css"&gt;
+.expand-in, .remark-fading .expand-in {
+  max-height: 0; 
+  overflow: hidden; 
+  transition: max-height 0.5s linear; 
+  -webkit-transition: max-height 0.5s linear;
+}
+.remark-visible .expand-in { max-height: 600px; }
+&lt;/style&gt;
+
+.remark-code.code-example.pa2.gray-4[
+.gray-1[library(moffittverse)]&lt;br&gt;
+.expand-in.h-250px.gray-1.bg-gray-8.ph3.pv1[
+── .b[Attaching packages] ──────── moffittverse 0.0.1 ──&lt;br&gt;
+.green[✓] tibble&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 3.0.1&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;.green[✓] purrr&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;0.3.4&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;br&gt;
+.green[✓] tidyr&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;1.1.0&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;.green[✓] dplyr&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;1.0.0&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;br&gt;
+.green[✓] fs&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 1.5.0&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;.green[✓] stringr&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;1.4.0&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;br&gt;
+.green[✓] glue&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 1.4.1&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;.green[✓] forcats&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;0.5.0&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;br&gt;
+.green[✓] readr&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;1.3.1&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;.green[✓] lubridate&amp;nbsp;&amp;nbsp;1.7.9&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;br&gt;
+.green[✓] readxl&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 1.3.1&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;.green[✓] moffittCDS 0.1.0
+]&lt;br&gt;&lt;br&gt;
+use_backend("abc")&lt;br&gt;&lt;br&gt;
+samples&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_inventory")&lt;br&gt;
+patients&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("patient")&lt;br&gt;
+sample_ind&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_indicators")&lt;br&gt;&lt;br&gt;
+samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;left_join(sample_ind,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"SAMPLE_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;left_join(patients,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"PERSON_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;abc_choice_replace()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;abc_not_deleted()
+]
+
+???
+
+This creates a common starting point  
+for everyone on the team.
+
+It also gives us a formal "on ramp"  
+to install and set up database dependencies
+that we can leverage in specific packages  
+to interface with the many back-end systems  
+used throughout the cancer and research institutes
+
+---
+
+.remark-code.code-example.pa2.gray-4[
 library(moffittverse)&lt;br&gt;&lt;br&gt;
 .leader-end-2.gray-1[use_backend("abc")]&lt;br&gt;&lt;br&gt;
 samples&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_inventory")&lt;br&gt;
@@ -1230,83 +1313,178 @@ samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(sample_ind,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"SAMPLE_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(patients,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"PERSON_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;abc_choice_replace()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
-&amp;nbsp;&amp;nbsp;abs_not_deleted()
+&amp;nbsp;&amp;nbsp;abc_not_deleted()
 ]
 
 &lt;div class="leader-start-2 animated-slide fadeIn"&gt;Standardized,&lt;br&gt; managed connections&lt;/div&gt;
 
 &lt;script type="text/javascript"&gt;
-connectElements(2)
+connectElements(2, 'bottom')
 &lt;/script&gt;
 
+???
+
+This makes connecting to a specific system straightforward...
+
+use backend...
+
 ---
-class: middle
 
-&lt;style type="text/css"&gt;
-.leader-start-3 {
-  top: 25%;
-}
-&lt;/style&gt;
-
-.remark-code.pa2.gray-4.w-60[
+.remark-code.code-example.pa2.gray-4[
 library(moffittverse)&lt;br&gt;&lt;br&gt;
-use_backend("abc")&lt;br&gt;&lt;br&gt;
-.leader-end-3.gray-1[samples&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_inventory")]&lt;br&gt;
-.gray-1[patients&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("patient")]&lt;br&gt;
-.gray-1[sample_ind&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_indicators")]&lt;br&gt;&lt;br&gt;
+.gray-1[use_backend("abc")]&lt;br&gt;
+.expand-in.h-150px.gray-1.bg-gray-8.ph3[
+.purple[library](DBI)&lt;br&gt;
+.purple[library](dbplyr)&lt;br&gt;
+.b[.purple[library](moffittABC)]&lt;br&gt;
+con &lt;- dbConnect(odbc::odbc(), uid = .green["fiddly"], pwd = .green["details"], ...)
+]&lt;br&gt;
+samples&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_inventory")&lt;br&gt;
+patients&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("patient")&lt;br&gt;
+sample_ind&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_indicators")&lt;br&gt;&lt;br&gt;
 samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(sample_ind,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"SAMPLE_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(patients,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"PERSON_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;abc_choice_replace()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
-&amp;nbsp;&amp;nbsp;abs_not_deleted()
+&amp;nbsp;&amp;nbsp;abc_not_deleted()
+]
+
+???
+
+behind the scenes `use_backend()` loads  
+additional packages for connecting with databases  
+as well as a back-end specific package,  
+`moffittABC`
+
+Each backend package has two primary goals,  
+the first is to simplify access.
+
+So by default, moffittABC will manage  
+connections to the ABC database
+
+---
+
+&lt;style type="text/css"&gt;
+.leader-start-3 {
+  top: 20%;
+  right: 10%;
+}
+.reveal-focus {
+  position: relative;
+  cursor: pointer;
+}
+.reveal-focus:focus {
+  outline: none;
+}
+.reveal-focus .reveal-shown {
+  transition: opacity 150ms linear;
+}
+.reveal-focus .reveal-other {
+  position: absolute;
+  transition: opacity 150ms linear;
+  width: 1000px;
+  left: 0;
+}
+.reveal-focus:not(:focus) .reveal-other {
+  opacity: 0;
+}
+.reveal-focus:focus .reveal-shown {
+  opacity: 0;
+}
+&lt;/style&gt;
+
+.remark-code.code-example.pa2.gray-4[
+library(moffittverse)&lt;br&gt;&lt;br&gt;
+use_backend("abc")&lt;br&gt;&lt;br&gt;
+.leader-end-3.gray-1[.onClickStyle.red.bg-red-8[samples]&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;&lt;span class = "reveal-focus" tabindex="1"&gt;&lt;span class="reveal-shown"&gt;abc_tbl("sample_inventory")&lt;/span&gt;&lt;span class="reveal-other"&gt;tbl(con, dbplyr::in_schema("ABC", "SAMPLE_INVENTORY"))&lt;/span&gt;]&lt;br&gt;
+.gray-1[.onClickStyle.purple.bg-purple-8[patients]&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("patient")]&lt;br&gt;
+.gray-1[.onClickStyle.yellow-1.bg-yellow-8[sample_ind]&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_indicators")]&lt;br&gt;&lt;br&gt;
+samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;left_join(sample_ind,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"SAMPLE_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;left_join(patients,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"PERSON_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;abc_choice_replace()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;abc_not_deleted()
 ]
 
 &lt;div class="leader-start-3 animated-slide fadeIn"&gt;Easy schema/table access&lt;/div&gt;
 
 &lt;script type="text/javascript"&gt;
-connectElements(3, 'bottom')
+connectElements(3, 'bottom', 'top');
+
+(function() {
+  let styleClickers = document.querySelectorAll('.remark-slides-area .onClickStyle')
+  for (let styleClicker of styleClickers) {
+    styleClicker.extraClasses = [...styleClicker.classList].filter(c =&gt; c !== 'onClickStyle')
+    styleClicker.classList = 'onClickStyle'
+    styleClicker.addEventListener('click', function(ev) {
+      console.log(styleClicker)
+      if (styleClicker.classList.length &gt; 1) {
+        styleClicker.classList = 'onClickStyle'
+      } else {
+        styleClicker.classList = ['onClickStyle', ...styleClicker.extraClasses].join(' ')
+      }
+    })
+  }
+})()
 &lt;/script&gt;
 
+???
+
+and it also provides easy access to tables.
+
+Here we use the `abc_tbl()` function,  
+to connect to table in the ABC schema  
+using a global connection managed by the package  
+
+to connect to the three tables we need
 
 ---
-class: middle
 
 &lt;style type="text/css"&gt;
 .leader-start-4 {
-  top: 25%;
-  color: var(--gray);
+  top: 45%;
+  right: 0;
 }
 &lt;/style&gt;
 
-.remark-code.pa2.gray-4.w-60[
+.remark-code.code-example.pa2.gray-4[
 library(moffittverse)&lt;br&gt;&lt;br&gt;
 use_backend("abc")&lt;br&gt;&lt;br&gt;
 samples&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_inventory")&lt;br&gt;
 patients&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("patient")&lt;br&gt;
 sample_ind&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_indicators")&lt;br&gt;&lt;br&gt;
-.gray-1[.red.b[samples]&amp;nbsp;%&amp;gt;%&amp;nbsp;]&lt;br&gt;
-.leader-end-4.gray-1[&amp;nbsp;&amp;nbsp;left_join(sample_ind,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"SAMPLE_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;]&lt;br&gt;
-.gray-1[&amp;nbsp;&amp;nbsp;left_join(.purple.b[patients],&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"PERSON_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;]&lt;br&gt;
+.gray-1[.red.bg-red-8[samples]&amp;nbsp;%&amp;gt;%&amp;nbsp;]&lt;br&gt;
+.leader-end-4.gray-1[&amp;nbsp;&amp;nbsp;left_join(.yellow-1.bg-yellow-8[sample_ind],&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"SAMPLE_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;]&lt;br&gt;
+.gray-1[&amp;nbsp;&amp;nbsp;left_join(.purple.bg-purple-8[patients],&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"PERSON_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;]&lt;br&gt;
 &amp;nbsp;&amp;nbsp;abc_choice_replace()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
-&amp;nbsp;&amp;nbsp;abs_not_deleted()
+&amp;nbsp;&amp;nbsp;abc_not_deleted()
 ]
 
-&lt;div class="leader-start-4 animated-slide fadeIn"&gt;Connect&lt;br&gt;&lt;span class="red"&gt;samples&lt;/span&gt; to &lt;span class="purple"&gt;patients&lt;/span&gt;&lt;/div&gt;
+&lt;div class="leader-start-4 animated-slide fadeIn"&gt;&lt;span class="red"&gt;samples&lt;/span&gt; &lt;span class="orange"&gt;&amp;rarr;&lt;/span&gt; &lt;span class="purple"&gt;patients&lt;/span&gt;&lt;/div&gt;
 
 &lt;script type="text/javascript"&gt;
 connectElements(4, 'bottom')
 &lt;/script&gt;
 
+???
+
+At this point we've set up our workspace environment,  
+and connected to the database and tables we need  
+
+... so we can now focus on  
+how these tables relate to each other  
+so we can link samples to patients
+
 ---
-class: middle
 
 &lt;style type="text/css"&gt;
 .leader-start-5 {
-  /* top: 25%; */
+  bottom: 15%;
+  right: 5%;
 }
 &lt;/style&gt;
 
-.remark-code.pa2.gray-4[
+.remark-code.code-example.pa2.gray-4[
 library(moffittverse)&lt;br&gt;&lt;br&gt;
 use_backend("abc")&lt;br&gt;&lt;br&gt;
 samples&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_inventory")&lt;br&gt;
@@ -1315,18 +1493,28 @@ sample_ind&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_indicators")&lt;br&gt;&lt
 samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(sample_ind,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"SAMPLE_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(patients,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"PERSON_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
-.gray-1[&amp;nbsp;&amp;nbsp;abc_choice_replace()&amp;nbsp;%&amp;gt;%&amp;nbsp;]&lt;br&gt;
-.leader-end-5.gray-1[&amp;nbsp;&amp;nbsp;abs_not_deleted()]
+.gray-1[&amp;nbsp;&amp;nbsp;&lt;span class="focus-ul" tabindex="1"&gt;abc_choice_replace()&lt;/span&gt;&amp;nbsp;%&amp;gt;%&amp;nbsp;]&lt;br&gt;
+.leader-end-5.gray-1[&amp;nbsp;&amp;nbsp;&lt;span class="focus-ul" tabindex="1"&gt;abc_not_deleted()&lt;/span&gt;]
 ]
 
-&lt;div class="leader-start-5 animated-slide fadeIn"&gt;Tedious, annoying,&lt;br&gt;or error prone&lt;/div&gt;
+&lt;div class="leader-start-5 animated-slide fadeIn"&gt;Common, tedious, or error prone&lt;/div&gt;
 
 &lt;script type="text/javascript"&gt;
-(function() {
-  let line5 = connectElements(5, 'bottom')
-  line5.path = 'arc'
-})()
+connectElements(5, 'left', 'bottom')
 &lt;/script&gt;
+
+???
+
+The final lines speak to the second goal  
+of the back-end specific packages  
+which is to wrap common, tedious or error-prone  
+data base moves into standard functions.
+
+Here we can use the powerful metaprogramming tools of R  
+to completely abstract what would otherwise be hundreds of lines of SQL, e.g:
+
+- automatically look up text labels of coded values
+- or apply a "not deleted" filter to all tables used in the query
   
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
