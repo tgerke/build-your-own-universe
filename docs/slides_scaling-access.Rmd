@@ -776,7 +776,10 @@ Let's take a look at what this query might look like
 in an alternate universe...
 
 ---
+layout: true
+class: animated-slide fadeIn
 
+---
 
 .remark-code.code-example.pa2[
 .purple[library](moffittverse)<br><br>
