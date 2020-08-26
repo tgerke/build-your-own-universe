@@ -1,3 +1,9 @@
+class: left middle blueprint2
+
+.f4[
+Scaling .b.blue[provisioning]<br>
+by scaling .b.em.red[access]
+]
 
 ???
 
@@ -113,7 +119,7 @@ class: center middle
 
 .center.w-50[
 .bubble.thought.vanishIn[
-How do I connect our .blue[tissue sample inventory] to a patient's .orange[clinical data]?
+How do I connect our .blue.b[tissue sample] inventory to a .orange.b[patient's clinical] data?
 ]
 
 .tr.f6[
