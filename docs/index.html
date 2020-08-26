@@ -251,6 +251,12 @@ hr {
 ---
 
 
+class: left middle blueprint2
+
+.f4[
+Scaling .b.blue[provisioning]&lt;br&gt;
+by scaling .b.em.red[access]
+]
 
 ???
 
@@ -366,7 +372,7 @@ class: center middle
 
 .center.w-50[
 .bubble.thought.vanishIn[
-How do I connect our .blue[tissue sample inventory] to a patient's .orange[clinical data]?
+How do I connect our .blue.b[tissue sample] inventory to a .orange.b[patient's clinical] data?
 ]
 
 .tr.f6[
@@ -1114,10 +1120,7 @@ Let's take a look at what this query might look like
 in an alternate universe...
 
 ---
-layout: true
 class: animated-slide fadeIn
-
----
 
 .remark-code.code-example.pa2[
 .purple[library](moffittverse)&lt;br&gt;&lt;br&gt;
@@ -1164,6 +1167,7 @@ loads a common set of packages
 that we use for nearly every data request.
 
 ---
+class: animated-slide fadeIn
 
 &lt;style type="text/css"&gt;
 .code-example {
@@ -1208,16 +1212,31 @@ samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 
 &lt;script type="text/javascript"&gt;
 function connectElements(i, startSocket = 'top', endSocket = 'auto') {
-  let start = document.querySelector(`.remark-slides-area .leader-start-${i}`)
-  let end = document.querySelector(`.remark-slides-area .leader-end-${i}`)
-  start.line = new LeaderLine(start, end, {
-    hide: !start.closest('.remark-slide-container').classList.contains('remark-visible')
+  let startElements = document
+    .querySelectorAll(`.remark-slides-area .leader-start-${i}`)
+    
+  startElements.forEach(function(start) {
+    let end = start.closest('.remark-slide-content').querySelector(`.leader-end-${i}`)
+    start.line = new LeaderLine(start, end, {
+      hide: !start.closest('.remark-slide-container').classList.contains('remark-visible')
+    })
+    start.line.setOptions({startSocket, endSocket})
+    let lineEl = document.querySelector('body &gt; svg.leader-line')
+    let slide = start.closest('.remark-slides-area')
+    slide.appendChild(lineEl)
+    return start.line
   })
-  start.line.setOptions({startSocket, endSocket})
-  let lineEl = document.querySelector('body &gt; svg.leader-line')
-  let slide = start.closest('.remark-slides-area')
-  slide.appendChild(lineEl)
-  return start.line
+}
+
+function showOrDrawLineElement(el) {
+  const lineClass = [...el.classList].filter(c =&gt; c.match(/^leader-start/))[0]
+  let lineElements = el.closest('.remark-slides-area').querySelectorAll('.' + lineClass)
+  el.line.position()
+  if (lineElements[0] === el) {
+    el.line.show('draw')
+  } else {
+    el.line.show('none')
+  }
 }
 
 connectElements(1, 'bottom')
@@ -1239,8 +1258,7 @@ slideshow.on('afterShowSlide', function(slide) {
   let lineLeaders = thisSlide.querySelectorAll('[class^="leader-start"]')
   if (lineLeaders.length) {
     lineLeaders.forEach(function(el) {
-      el.line.position()
-      el.line.show('draw')
+      showOrDrawLineElement(el)
     })
   }
 })
@@ -1262,17 +1280,25 @@ specifically tailored to my team's workflow.
 ---
 
 &lt;style type="text/css"&gt;
-.expand-in, .remark-fading .expand-in {
-  max-height: 0; 
-  overflow: hidden; 
-  transition: max-height 0.5s linear; 
-  -webkit-transition: max-height 0.5s linear;
+.expand-in {
+  max-height: 0;
+  overflow: hidden;
 }
-.remark-visible .expand-in { max-height: 600px; }
+.remark-fading .expand-in {
+  max-height: 600px;
+}
+.remark-visible .expand-in {
+  animation: expand-in 1.5s linear;
+  animation-fill-mode: forwards;
+}
+@keyframes expand-in {
+  0% { max-height: 0 }
+  100% { max-height: 600px }
+}
 &lt;/style&gt;
 
 .remark-code.code-example.pa2.gray-4[
-.gray-1[library(moffittverse)]&lt;br&gt;
+.leader-end-1.gray-1[library(moffittverse)]&lt;br&gt;
 .expand-in.h-250px.gray-1.bg-gray-8.ph3.pv1[
 ── .b[Attaching packages] ──────── moffittverse 0.0.1 ──&lt;br&gt;
 .green[✓] tibble&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 3.0.1&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;.green[✓] purrr&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;0.3.4&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;br&gt;
@@ -1293,6 +1319,8 @@ samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;abc_not_deleted()
 ]
 
+&lt;div class="leader-start-1"&gt;Our universe&lt;/div&gt;
+
 ???
 
 This creates a common starting point  
@@ -1305,6 +1333,7 @@ to interface with the many back-end systems
 used throughout the cancer and research institutes
 
 ---
+class: animated-slide fadeIn
 
 .remark-code.code-example.pa2.gray-4[
 library(moffittverse)&lt;br&gt;&lt;br&gt;
@@ -1332,10 +1361,11 @@ This makes connecting to a specific system straightforward...
 use backend...
 
 ---
+class: animated-slide fadeIn
 
 .remark-code.code-example.pa2.gray-4[
 library(moffittverse)&lt;br&gt;&lt;br&gt;
-.gray-1[use_backend("abc")]&lt;br&gt;
+.leader-end-2.gray-1[use_backend("abc")]&lt;br&gt;&lt;br&gt;
 .expand-in.h-150px.gray-1.bg-gray-8.ph3[
 .purple[library](DBI)&lt;br&gt;
 .purple[library](dbplyr)&lt;br&gt;
@@ -1352,6 +1382,8 @@ samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;abc_not_deleted()
 ]
 
+&lt;div class="leader-start-2"&gt;Standardized,&lt;br&gt; managed connections&lt;/div&gt;
+
 ???
 
 behind the scenes `use_backend()` loads  
@@ -1366,6 +1398,7 @@ So by default, moffittABC will manage
 connections to the ABC database
 
 ---
+class: animated-slide fadeIn
 
 &lt;style type="text/css"&gt;
 .leader-start-3 {
