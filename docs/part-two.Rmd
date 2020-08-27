@@ -1,3 +1,68 @@
+---
+title: "Build your own universe"
+subtitle: "Scale high-quality research data provisioning with R packages"
+author: 
+  - Travis Gerke
+  - Garrick Aden-Buie
+institute: ".small[.blue-medium[Moffitt Cancer Center]]"
+date: 'August 28, 2020'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: 
+      - css/moffitt-xaringan.css
+      - css/moffitt-xaringan-extra.css
+      - css/talk-base.css
+    includes:
+      in_header: head.html
+    seal: false
+    nature:
+      titleSlideClass: ["bottom", "left"]
+      slideNumberFormat: "%current%"
+      highlightStyle: atom-one-light
+      highlightLines: true
+      ratio: 16:9
+      countIncrementalSlides: true
+---
+
+
+class: left middle blueprint2
+
+```{r setup, echo=FALSE}
+source("library.R")
+source("setup.R")$value
+```
+
+.f4[
+Scaling .b.blue[provisioning]<br>
+by scaling .b.red[people]
+]
+
+.absolute.bottom-1.right-1[
+[...continued from part 1](index.html)
+]
+
+???
+
+Travis ends here...
+
+
+---
+class: left middle blueprint2
+
+.f4[
+Scaling .blue[provisioning]<br>
+by scaling .red[people]<br>
+... by scaling .b.green[access]
+]
+
+
+???
+
+I'm going to start with an entirely hypothetical but familiar story...
+
+---
+
 class: center middle
 
 ```{css thought-bubble, echo=FALSE}
