@@ -26,6 +26,7 @@ output:
 
 name: title
 class: left bottom hide-count
+background-color: #FBFCFF;
 
 
 ```{r setup, echo=FALSE}
@@ -34,6 +35,9 @@ source("setup.R")$value
 ```
 
 <!-- Title Slide -->
+
+<div class="city-360-rotate city-360-top"></div>
+<div class="city-360-rotate city-360-bottom"></div>
 
 ```{r title-slides, echo=FALSE, message = FALSE, warning = FALSE}
 htmltools::withTags(
