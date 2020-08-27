@@ -1,0 +1,48 @@
+#slide-title {
+  background-image: url('../figures/city-360.jpg');
+  background-size: 100%;
+  background-position: 0 -530px;
+  background-repeat: repeat-y;
+}
+.talk-title {
+  margin-bottom: 80px;
+}
+
+.talk-meta {
+  left: 1em;
+  width: 100%;
+}
+
+.talk-author {
+  font-size: 1em;
+}
+
+.talk-date {
+  font-size: 0.8em;
+}
+
+.blueprint1 {
+  background-image: url('../figures/star-trek-blueprint-1.jpg');
+  background-size: cover;
+}
+.blueprint2 {
+  background-image: url('../figures/star-trek-blueprint-2.jpg');
+  background-size: cover;
+}
+
+hr {
+ box-sizing:content-box;
+ height:3px;
+ overflow:visible;
+ border: none;
+ background: var(--moffitt-gray);
+}
+
+.remark-container {
+  background: white;
+}
+.remark-slide-scaler {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  outline: 2px solid #eee;
+}
