@@ -13,7 +13,7 @@ output:
       - css/moffitt-xaringan.css
       - css/moffitt-xaringan-extra.css
       - css/talk-base.css
-      - css/build-your-universe.css
+      - css/build-your-universe.min.css
     seal: false
     nature:
       titleSlideClass: ["bottom", "left"]
