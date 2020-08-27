@@ -12,9 +12,11 @@
     <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
     <script src="libs/tile-view/tile-view.js"></script>
     <script src="https://unpkg.com/leader-line@1.0.5/leader-line.min.js"></script>
+    <script src="js/part-two.js"></script>
     <link rel="stylesheet" href="css/moffitt-xaringan.css" type="text/css" />
     <link rel="stylesheet" href="css/moffitt-xaringan-extra.css" type="text/css" />
     <link rel="stylesheet" href="css/talk-base.css" type="text/css" />
+    <link rel="stylesheet" href="css/part-two.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -57,111 +59,6 @@ I'm going to start with an entirely hypothetical but familiar story...
 
 class: center middle
 
-&lt;style type="text/css"&gt;
-.bubble p {
-  position: relative;
-  width: 300px;
-  text-align: center;
-  line-height: 1.4em;
-  margin: 40px auto;
-  background-color: #fff;
-  border: 8px solid #333;
-  border-radius: 30px;
-  font-size: 1.25em;
-}
-
-.thought p {
-  width: 500px;
-  border-radius: 200px;
-  padding: 30px;  
-}
-
-.bubble p:before,
-.bubble p:after {
-  content: ' ';
-  position: absolute;
-  width: 0;
-  height: 0;
-}
-
-.speech p:before {
-  left: 30px;
-  bottom: -50px;
-  border: 25px solid;
-  border-color: #333 transparent transparent #333;
-}
-
-.speech p:after {
-  left: 38px;
-  bottom: -30px;
-  border: 15px solid;
-  border-color: #fff transparent transparent #fff;
-}
-
-.thought p:before,
-.thought p:after {
-  right: 10px;
-  bottom: -30px;
-  width: 40px;
-  height: 40px;
-  background-color: #fff;
-  border: 8px solid #666;
-  -webkit-border-radius: 28px;
-  -moz-border-radius: 28px;
-  border-radius: 28px;
-}
-
-.thought p:after {
-  width: 20px;
-  height: 20px;
-  right: 5px;
-  bottom: -40px;
-  border-color: #999;
-  -webkit-border-radius: 18px;
-  -moz-border-radius: 18px;
-  border-radius: 18px;
-}
-
-/* https://github.com/miniMAC/magic/blob/master/dist/magic.css */
-.remark-visible .vanishIn {
-  -webkit-animation-name: vanishIn;
-          animation-name: vanishIn;
-  -webkit-animation-duration: 2s;
-          animation-duration: 2s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
-  
-}
-
-@-webkit-keyframes vanishIn {
-  0% {
-    opacity: 0;
-    transform-origin: 50% 50%;
-    transform: scale(2, 2);
-    -webkit-filter: blur(90px);
-            filter: blur(90px); }
-  100% {
-    opacity: 1;
-    transform-origin: 50% 50%;
-    transform: scale(1, 1);
-    -webkit-filter: blur(0px);
-            filter: blur(0px); } }
-
-@keyframes vanishIn {
-  0% {
-    opacity: 0;
-    transform-origin: 50% 50%;
-    transform: scale(2, 2);
-    -webkit-filter: blur(90px);
-            filter: blur(90px); }
-  100% {
-    opacity: 1;
-    transform-origin: 50% 50%;
-    transform: scale(1, 1);
-    -webkit-filter: blur(0px);
-            filter: blur(0px); } }
-&lt;/style&gt;
-
 .center.w-50[
 .bubble.thought.vanishIn[
 How do I connect our .blue.b[tissue sample] inventory to a .orange.b[patient's clinical] data?
@@ -198,98 +95,6 @@ I go to the self-service data wall
 and point at the numbers I want.
 
 ---
-
-&lt;style type="text/css"&gt;
-.remark-visible .css-typing p {
-  opacity: 0;
-  border-right: .15em solid orange;
-  white-space: nowrap;
-  overflow: hidden;
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-}
-
-.remark-visible .css-typing p:nth-child(1) {
-  width: 870px;
-  -webkit-animation: type 3s steps(70, end);
-  animation: type 3s steps(70, end);
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-}
-
-.remark-visible .css-typing p:nth-child(2) {
-  width: 390px;
-  -webkit-animation: type 2s steps(31, end);
-  animation: type 2s steps(31, end);
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-  -webkit-animation-delay: 4s;
-  animation-delay: 4s;
-}
-
-.remark-visible .css-typing p:nth-child(3) {
-  width: 110px;
-  -webkit-animation: type 0.5s steps(7, end);
-  animation: type 0.5s steps(7, end);
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-  -webkit-animation-delay: 7s;
-  animation-delay: 7s;
-}
-
-.remark-visible .css-typing p:nth-child(4) {
-  width: 100px;
-  -webkit-animation: type 0.5s steps(7, end);
-  animation: type 0.5s steps(7, end);
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-  -webkit-animation-delay: 7.5s;
-  animation-delay: 7.5s;
-}
-
-@keyframes type {
-  0% {
-    width: 0;
-  }
-  1% {
-    opacity: 1;
-  }
-  99.9% {
-    border-right: .15em solid orange;
-  }
-  100% {
-    opacity: 1;
-    border: none;
-  }
-}
-
-@-webkit-keyframes type {
-  0% {
-    width: 0;
-  }
-  1% {
-    opacity: 1;
-  }
-  99.9% {
-    border-right: .15em solid orange;
-  }
-  100% {
-    opacity: 1;
-    border: none;
-  }
-}
-
-@keyframes blink {
-  50% {
-    border-color: transparent;
-  }
-}
-@-webkit-keyframes blink {
-  50% {
-    border-color: tranparent;
-  }
-}
-&lt;/style&gt;
 
 .ba.b--gray-4.br2.pv2.ph3.mv5.shadow-4.animated.fadeIn[
 .b[Aden-Buie, Garrick]&lt;br&gt;
@@ -359,46 +164,6 @@ Thanks!
 .gray-3[Garrick]
 ]
 
-
-&lt;style type="text/css"&gt;
-#email-attachment:hover {
-  color: #eb1455
-}
-.zoomForward {
-  animation: zoomForward 1s cubic-bezier(.45,-0.12,.51,.71);
-  transform-origin: center;
-}
-@keyframes zoomForward {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(25);
-  }
-}
-@-webkit-keyframes zoomForward {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(25);
-  }
-}
-&lt;/style&gt;
-
-&lt;script type="text/javascript"&gt;
-(function() {
-  btn = document.getElementById('email-attachment')
-  btn.addEventListener('click', function(ev) {
-    btn.classList.toggle('zoomForward')
-    setTimeout(() =&gt; slideshow.gotoNextSlide(), 1000)
-    setTimeout(() =&gt; btn.classList.remove('zoomForward'), 1500)
-  })
-})()
-&lt;/script&gt;
-
 .ba.b--gray-4.br2.pv2.ph3.mv5.shadow-4.relative.animated.bounceInDown.delay-2s[
 .b[Friendly Data Ops Person]&lt;br&gt;
 RE: Question about Sample Availability Table  
@@ -428,44 +193,6 @@ _read email_
 And look, the email came with an attachment that I can open up.
 
 ---
-
-&lt;style type="text/css"&gt;
-.code-two-column .remark-code {
-  font-size: 0.33em;
-  -webkit-column-count: 2;
-  -moz-column-count: 2;
-  column-count: 2;
-  -webkit-column-gap: 20px;
-  -moz-column-gap: 20px;
-  column-gap: 20px;
-}
-
-.code-two-column pre {
-  margin-top: 0;
-  background-color: #FAFAFA;
-  padding-left: 1em;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-}
-
-.code-window-title-bar {
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  padding-top: 10px;
-}
-
-.code-window-circle {
-  width: 17px;
-  height: 18px;
-  margin-right: 6px;
-}
-
-.code-window-circles {
-  position: absolute;
-  left: 12px;
-  top: 11px;
-}
-&lt;/style&gt;
 
 .code-two-column.shadow-4.animated.zoomIn[
 &lt;div class="code code-window-title-bar ph2 mb0 pv1 mt5 small bg-gray-4 gray-1 center relative"&gt;
@@ -577,114 +304,6 @@ in a slightly different format...
 ---
 class: no-logo no-border hide-count word-doc animated-slide slideInRight boingOutDown
 
-&lt;style type="text/css"&gt;
-.word-doc {
-  background-image: url('figures/word-doc.png');
-  background-size: cover;
-  overflow: hidden;
-  height: 100%;
-  padding-top: 5em;
-}
-
-.word-doc pre {
-  max-height: 66%;
-  overflow: hidden;
-  position: absolute;
-  width: 90%;
-}
-
-.word-doc pre code.sql {
-  background: white;
-  font-family: sans-serif;
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-#sql-font-size-down {
-  background: transparent;
-  width: 35px;
-  height: 30px;
-  position: absolute;
-  top: 77px;
-  left: 404px;
-  border: none;
-  cursor: pointer;
-}
-#sql-font-size-up {
-  background: transparent;
-  width: 35px;
-  height: 30px;
-  position: absolute;
-  top: 77px;
-  left: 365px;
-  border: none;
-  cursor: pointer;
-}
-#sql-font-comic-sans {
-  background: transparent;
-  text-align: center;
-  width: 125px;
-  height: 30px;
-  padding: 0;
-  position: absolute;
-  top: 77px;
-  left: 138px;
-  border: none;
-  cursor: pointer;
-  font-size: 21px;
-}
-
-/* magic.css https://github.com/miniMAC/magic/blob/master/dist/magic.css */
-.remark-fading .boingOutDown {
-  -webkit-animation-name: boingOutDown;
-  animation-name: boingOutDown;
-}
-
-@-webkit-keyframes boingOutDown {
-  0% {
-    opacity: 1;
-    transform-origin: 100% 100%;
-    transform: perspective(800px) rotateX(0deg) rotateY(0deg); }
-  20% {
-    opacity: 1;
-    transform-origin: 100% 100%;
-    transform: perspective(800px) rotateX(0deg) rotateY(10deg); }
-  30% {
-    opacity: 1;
-    transform-origin: 0% 100%;
-    transform: perspective(800px) rotateX(0deg) rotateY(0deg); }
-  40% {
-    opacity: 1;
-    transform-origin: 0% 100%;
-    transform: perspective(800px) rotateX(10deg) rotateY(10deg); }
-  100% {
-    opacity: 0;
-    transform-origin: 100% 100%;
-    transform: perspective(800px) rotateX(90deg) rotateY(0deg); } }
-
-@keyframes boingOutDown {
-  0% {
-    opacity: 1;
-    transform-origin: 100% 100%;
-    transform: perspective(800px) rotateX(0deg) rotateY(0deg); }
-  20% {
-    opacity: 1;
-    transform-origin: 100% 100%;
-    transform: perspective(800px) rotateX(0deg) rotateY(10deg); }
-  30% {
-    opacity: 1;
-    transform-origin: 0% 100%;
-    transform: perspective(800px) rotateX(0deg) rotateY(0deg); }
-  40% {
-    opacity: 1;
-    transform-origin: 0% 100%;
-    transform: perspective(800px) rotateX(10deg) rotateY(10deg); }
-  100% {
-    opacity: 0;
-    transform-origin: 100% 100%;
-    transform: perspective(800px) rotateX(90deg) rotateY(0deg); } }
-&lt;/style&gt;
-
 &lt;button id="sql-font-comic-sans" type="button"&gt;&lt;/button&gt;
 &lt;button id="sql-font-size-up" type="button"&gt;&lt;/button&gt;
 &lt;button id="sql-font-size-down" type="button"&gt;&lt;/button&gt;
@@ -776,36 +395,6 @@ LEFT JOIN ABC.CHOICE CH36 ON SA.DERIVED_SOO_TISSUE_TYPE = CH36.CHOICE_ID
 WHERE SA.ISDELETED = 0
 ```
 
-&lt;script type="text/javascript"&gt;
-(function() {
-  const btnDown = document.getElementById('sql-font-size-down')
-  const btnUp = document.getElementById('sql-font-size-up')
-  const btnFont = document.getElementById('sql-font-comic-sans')
-  const code = document.querySelector('.word-doc pre code')
-  let size = 100
-  code.style.fontSize = size + '%'
-  btnDown.addEventListener('click', function() {
-    if (size &lt;= 10) return;
-    size = size - 10
-    code.style.fontSize = size + '%'
-  })
-  btnUp.addEventListener('click', function() {
-    if (size &gt;= 100) return;
-    size = size + 10
-    code.style.fontSize = size + '%'
-  })
-  btnFont.addEventListener('click', function(ev) {
-    if (btnFont.innerText === '') {
-      btnFont.innerText = 'Comic Sans'
-      code.style.fontFamily = '"Comic Sans MS", cursive, sans-serif'
-    } else {
-      btnFont.innerText = ''
-      code.style.fontFamily = 'sans-serif'
-    }
-  })
-})()
-&lt;/script&gt;
-
 ???
 
 Like a word document!
@@ -837,23 +426,7 @@ but we have other ways of working with data
 that have been specifically designed with humans in mind
 
 ---
-
 class: middle
-
-&lt;style type="text/css"&gt;
-.focus-ul {
-  background-image: linear-gradient(90deg, #eb1455, #eb1455);
-  background-size: 0 100%;
-  background-repeat: no-repeat;
-  transition: background-size 0.25s ease-in, color 0.5s ease-in;
-}
-
-.focus-ul:focus {
-  outline: none;
-  color: #FFF;
-  background-size: 100% 100%;
-}
-&lt;/style&gt;
 
 .f6.b[.code[dplyr] is .green[human logic] &amp;#x1F917;]
 
@@ -888,12 +461,6 @@ It doesn't have to be you.
 ---
 class: middle animated-slide fadeIn
 
-&lt;style type="text/css"&gt;
-del {
-  text-decoration-color: #eb1455;
-  text-decoration-thickness: 10px;
-}
-&lt;/style&gt;
 
 &lt;div class="f4 blue lh-copy"&gt;
 Of course someone&lt;br&gt;
@@ -961,32 +528,6 @@ that we use for nearly every data request.
 ---
 class: animated-slide fadeIn
 
-&lt;style type="text/css"&gt;
-.code-example {
-  position: absolute;
-  top: 100px;
-}
-.leader-line {
-  z-index: 100;
-}
-[class^="leader-start"] {
-  color: var(--orange);
-  font-size: 1.1em;
-  width: 450px;
-  margin: 0;
-  position: absolute;
-  text-align: center;
-}
-.leader-start-1 {
-  top: 10%;
-  right: 30%;
-}
-.leader-start-2 {
-  top: 15%;
-  right: 20%;
-}
-&lt;/style&gt;
-
 .remark-code.code-example.pa2.gray-4[
 .leader-end-1.gray-1[library(moffittverse)]&lt;br&gt;&lt;br&gt;
 use_backend("abc")&lt;br&gt;&lt;br&gt;
@@ -1002,66 +543,6 @@ samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 
 &lt;div class="leader-start-1 animated-slide fadeIn"&gt;Our universe&lt;/div&gt;
 
-&lt;script type="text/javascript"&gt;
-function connectElements(i, startSocket = 'top', endSocket = 'auto') {
-  let startElements = document
-    .querySelectorAll(`.remark-slides-area .leader-start-${i}`)
-    
-  startElements.forEach(function(start) {
-    let end = start.closest('.remark-slide-content').querySelector(`.leader-end-${i}`)
-    start.line = new LeaderLine(start, end, {
-      hide: !start.closest('.remark-slide-container').classList.contains('remark-visible')
-    })
-    start.line.setOptions({startSocket, endSocket})
-    let lineEl = document.querySelector('body &gt; svg.leader-line')
-    let slide = start.closest('.remark-slides-area')
-    slide.appendChild(lineEl)
-    return start.line
-  })
-}
-
-function showOrDrawLineElement(el) {
-  const lineClass = [...el.classList].filter(c =&gt; c.match(/^leader-start/))[0]
-  let lineElements = el.closest('.remark-slides-area').querySelectorAll('.' + lineClass)
-  el.line.position()
-  if (lineElements[0] === el) {
-    el.line.show('draw')
-  } else {
-    el.line.show('none')
-  }
-}
-
-connectElements(1, 'bottom')
-
-slideshow.on('hideSlide', function(slide) {
-  let idx = slide.getSlideIndex()
-  slides = document.querySelectorAll('.remark-slides-area .remark-slide-container')
-  let thisSlide = slides[idx]
-  let lineLeaders = thisSlide.querySelectorAll('[class^="leader-start"]')
-  if (lineLeaders.length) {
-    lineLeaders.forEach(el =&gt; el.line.hide('none'))
-  }
-})
-
-slideshow.on('afterShowSlide', function(slide) {
-  let idx = slide.getSlideIndex()
-  slides = document.querySelectorAll('.remark-slides-area .remark-slide-container')
-  let thisSlide = slides[idx]
-  let lineLeaders = thisSlide.querySelectorAll('[class^="leader-start"]')
-  if (lineLeaders.length) {
-    lineLeaders.forEach(function(el) {
-      showOrDrawLineElement(el)
-    })
-  }
-})
-
-window.addEventListener('resize', function() {
-  document
-    .querySelectorAll('.remark-slides-area [class^="leader-start"]')
-    .forEach(el =&gt; el.line.position())
-});
-&lt;/script&gt;
-
 ???
 
 Most of the packages are from the tidyverse,
@@ -1070,24 +551,6 @@ but we also include our own supporting package: `moffittCDS`
 specifically tailored to my team's workflow.
 
 ---
-
-&lt;style type="text/css"&gt;
-.expand-in {
-  max-height: 0;
-  overflow: hidden;
-}
-.remark-fading .expand-in {
-  max-height: 600px;
-}
-.remark-visible .expand-in {
-  animation: expand-in 1.5s linear;
-  animation-fill-mode: forwards;
-}
-@keyframes expand-in {
-  0% { max-height: 0 }
-  100% { max-height: 600px }
-}
-&lt;/style&gt;
 
 .remark-code.code-example.pa2.gray-4[
 .leader-end-1.gray-1[library(moffittverse)]&lt;br&gt;
@@ -1142,10 +605,6 @@ samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 
 &lt;div class="leader-start-2 animated-slide fadeIn"&gt;Standardized,&lt;br&gt; managed connections&lt;/div&gt;
 
-&lt;script type="text/javascript"&gt;
-connectElements(2, 'bottom')
-&lt;/script&gt;
-
 ???
 
 This makes connecting to a specific system straightforward...
@@ -1192,34 +651,6 @@ connections to the ABC database
 ---
 class: animated-slide fadeIn
 
-&lt;style type="text/css"&gt;
-.leader-start-3 {
-  top: 20%;
-  right: 10%;
-}
-.reveal-focus {
-  position: relative;
-  cursor: pointer;
-}
-.reveal-focus:focus {
-  outline: none;
-}
-.reveal-focus .reveal-shown {
-  transition: opacity 150ms linear;
-}
-.reveal-focus .reveal-other {
-  position: absolute;
-  transition: opacity 150ms linear;
-  width: 1000px;
-  left: 0;
-}
-.reveal-focus:not(:focus) .reveal-other {
-  opacity: 0;
-}
-.reveal-focus:focus .reveal-shown {
-  opacity: 0;
-}
-&lt;/style&gt;
 
 .remark-code.code-example.pa2.gray-4[
 library(moffittverse)&lt;br&gt;&lt;br&gt;
@@ -1236,26 +667,6 @@ samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 
 &lt;div class="leader-start-3 animated-slide fadeIn"&gt;Easy schema/table access&lt;/div&gt;
 
-&lt;script type="text/javascript"&gt;
-connectElements(3, 'bottom', 'top');
-
-(function() {
-  let styleClickers = document.querySelectorAll('.remark-slides-area .onClickStyle')
-  for (let styleClicker of styleClickers) {
-    styleClicker.extraClasses = [...styleClicker.classList].filter(c =&gt; c !== 'onClickStyle')
-    styleClicker.classList = 'onClickStyle'
-    styleClicker.addEventListener('click', function(ev) {
-      console.log(styleClicker)
-      if (styleClicker.classList.length &gt; 1) {
-        styleClicker.classList = 'onClickStyle'
-      } else {
-        styleClicker.classList = ['onClickStyle', ...styleClicker.extraClasses].join(' ')
-      }
-    })
-  }
-})()
-&lt;/script&gt;
-
 ???
 
 and it also provides easy access to tables.
@@ -1267,13 +678,6 @@ using a global connection managed by the package
 to connect to the three tables we need
 
 ---
-
-&lt;style type="text/css"&gt;
-.leader-start-4 {
-  top: 45%;
-  right: 0;
-}
-&lt;/style&gt;
 
 .remark-code.code-example.pa2.gray-4[
 library(moffittverse)&lt;br&gt;&lt;br&gt;
@@ -1290,10 +694,6 @@ sample_ind&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_indicators")&lt;br&gt;&lt
 
 &lt;div class="leader-start-4 animated-slide fadeIn"&gt;&lt;span class="red"&gt;samples&lt;/span&gt; &lt;span class="orange"&gt;&amp;rarr;&lt;/span&gt; &lt;span class="purple"&gt;patients&lt;/span&gt;&lt;/div&gt;
 
-&lt;script type="text/javascript"&gt;
-connectElements(4, 'bottom')
-&lt;/script&gt;
-
 ???
 
 At this point we've set up our workspace environment,  
@@ -1304,13 +704,6 @@ how these tables relate to each other
 so we can link samples to patients
 
 ---
-
-&lt;style type="text/css"&gt;
-.leader-start-5 {
-  bottom: 15%;
-  right: 5%;
-}
-&lt;/style&gt;
 
 .remark-code.code-example.pa2.gray-4[
 library(moffittverse)&lt;br&gt;&lt;br&gt;
@@ -1326,10 +719,6 @@ samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 ]
 
 &lt;div class="leader-start-5 animated-slide fadeIn"&gt;Common, tedious, or error prone&lt;/div&gt;
-
-&lt;script type="text/javascript"&gt;
-connectElements(5, 'left', 'bottom')
-&lt;/script&gt;
 
 ???
 
