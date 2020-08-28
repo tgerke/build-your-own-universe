@@ -13,7 +13,7 @@ output:
       - css/moffitt-xaringan.css
       - css/moffitt-xaringan-extra.css
       - css/talk-base.css
-      - css/part-two.css
+      - css/part-two.min.css
     includes:
       in_header: head.html
     seal: false
@@ -84,13 +84,14 @@ How do I connect our .blue.b[tissue sample] inventory to a .orange.b[patient's c
 
 ???
 
-It starts with a question.
-I want to connect our tissue sample inventory
-to patient clinical data.
+It starts with a question
 
-It's not something I've done before,
-so I'm not quite sure how to access the samples table
-or how to link a sample to a patient
+I want to connect **our tissue sample** inventory  
+to **patient clinical** data.
+
+It's not something I've done before,  
+so I'm not quite sure how to access the samples table  
+or how to link a sample to a patient  
 but obviously it has to be possible.
 
 So how do I get started?
@@ -103,8 +104,8 @@ background-position: center right
 
 ???
 
-If you believe the big data stock photos,
-I go to the self-service data wall
+If you believe the big data stock photos,  
+I go to the self-service data wall  
 and point at the numbers I want.
 
 ---
@@ -130,10 +131,12 @@ Thanks!
 
 ???
 
-In reality, it probably starts with an email.
+In reality, it probably starts with an email.  
 Or many emails.
 
-I start by reaching out to someone I know who manages that particular data resource
+I start by reaching out to someone I know  
+in data engineering  
+who manages that particular data resource  
 to see what they can tell me...
 
 ---
@@ -309,12 +312,16 @@ WHERE SA.ISDELETED = 0
 
 And I'm immediately hit with a wall of sequel.
 
-This query doesn't look pretty but in a couple hours I'll probably get the gist of it...
+This query doesn't look pretty   
+but in a couple hours I'll probably get the gist of it...
 
-Like that it uses the `sample`, `sample_indicator`
-and `patient` tables
+Somewhere in here, I'll find that this query uses...  
+`sample`,  
+`patient`  and
+`sample_indicator` tables
 
-and that these lines are for
+and that all these lines   
+are for translated coded columns into text labels
 
 And hey, it's at least code, right?
 
@@ -699,8 +706,6 @@ explaining to humans
 how the data is being collected and transformed
 
 There are still plenty of assumptions in this code,  
-like: _can you connect to the database?_,  
-or _what is actually going on inside of the custom functions?_,  
 but as we'll see,  
 because these functions live in R packages  
 they bring a lot of context with them
@@ -850,3 +855,22 @@ for how we accomplish tasks,
 which makes it easy to say to engineering:  
 _this is what we do_ or  
 _this is what the new platform needs to support_.
+
+---
+layout: false
+
+<div><img src="figures/github-issue-create.jpg" /></div>
+
+---
+
+<div><img src="figures/github-issue-answer.jpg" /></div>
+
+---
+class: big
+
+## Tips
+
+- .green[&#x2714;] **Do** 
+
+- .red[&#x274C;] **Don't**
+
