@@ -72,6 +72,7 @@
     for (const styleClicker of styleClickers) {
       styleClicker.extraClasses = [...styleClicker.classList].filter(c => c !== 'onClickStyle')
       styleClicker.classList = 'onClickStyle'
+      styleClicker.style.cursor = 'pointer'
       styleClicker.addEventListener('click', function (ev) {
         console.log(styleClicker)
         if (styleClicker.classList.length > 1) {

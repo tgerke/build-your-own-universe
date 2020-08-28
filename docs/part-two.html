@@ -11,6 +11,7 @@
     <link href="libs/animate.css/animate.min.css" rel="stylesheet" />
     <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
     <script src="libs/tile-view/tile-view.js"></script>
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
     <script src="https://unpkg.com/leader-line@1.0.5/leader-line.min.js"></script>
     <script src="js/part-two.js"></script>
     <link rel="stylesheet" href="css/moffitt-xaringan.css" type="text/css" />
@@ -20,7 +21,6 @@
   </head>
   <body>
     <textarea id="source">
-
 
 
 class: left middle blueprint2
@@ -53,6 +53,12 @@ by scaling .red[people]&lt;br&gt;
 
 ???
 
+So as Travis talked about scaling provisioning  
+by scaling systems of people,  
+I'm going to talk about how we scale  
+access to data systems  
+through R packages
+
 I'm going to start with an entirely hypothetical but familiar story...
 
 ---
@@ -71,13 +77,14 @@ How do I connect our .blue.b[tissue sample] inventory to a .orange.b[patient's c
 
 ???
 
-It starts with a question.
-I want to connect our tissue sample inventory
-to patient clinical data.
+It starts with a question
 
-It's not something I've done before,
-so I'm not quite sure how to access the samples table
-or how to link a sample to a patient
+I want to connect **our tissue sample** inventory  
+to **patient clinical** data.
+
+It's not something I've done before,  
+so I'm not quite sure how to access the samples table  
+or how to link a sample to a patient  
 but obviously it has to be possible.
 
 So how do I get started?
@@ -90,8 +97,8 @@ background-position: center right
 
 ???
 
-If you believe the big data stock photos,
-I go to the self-service data wall
+If you believe the big data stock photos,  
+I go to the self-service data wall  
 and point at the numbers I want.
 
 ---
@@ -117,10 +124,12 @@ Thanks!
 
 ???
 
-In reality, it probably starts with an email.
+In reality, it probably starts with an email.  
 Or many emails.
 
-I start by reaching out to someone I know who manages that particular data resource
+I start by reaching out to someone I know  
+in data engineering  
+who manages that particular data resource  
 to see what they can tell me...
 
 ---
@@ -297,12 +306,16 @@ WHERE SA.ISDELETED = 0
 
 And I'm immediately hit with a wall of sequel.
 
-This query doesn't look pretty but in a couple hours I'll probably get the gist of it...
+This query doesn't look pretty   
+but in a couple hours I'll probably get the gist of it...
 
-Like that it uses the `sample`, `sample_indicator`
-and `patient` tables
+Somewhere in here, I'll find that this query uses...  
+`sample`,  
+`patient`  and
+`sample_indicator` tables
 
-and that these lines are for
+and that all these lines   
+are for translated coded columns into text labels
 
 And hey, it's at least code, right?
 
@@ -487,6 +500,7 @@ Let's take a look at what this query might look like
 in an alternate universe...
 
 ---
+name: moffittverse-code-example
 class: animated-slide fadeIn
 
 .remark-code.code-example.pa2[
@@ -498,8 +512,8 @@ sample_ind&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl(.green["sample_indicators"])&lt;b
 samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(sample_ind,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;.green["SAMPLE_ID"])&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(patients,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;.green["PERSON_ID"])&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
-&amp;nbsp;&amp;nbsp;abc_choice_replace()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
-&amp;nbsp;&amp;nbsp;abc_not_deleted()
+&amp;nbsp;&amp;nbsp;abc_not_deleted()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;abc_choice_replace()
 ]
 
 ???
@@ -520,18 +534,13 @@ sample_ind&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_indicators")&lt;br&gt;&lt
 samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(sample_ind,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"SAMPLE_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(patients,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"PERSON_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
-&amp;nbsp;&amp;nbsp;abc_choice_replace()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
-&amp;nbsp;&amp;nbsp;abc_not_deleted()
+&amp;nbsp;&amp;nbsp;abc_not_deleted()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;abc_choice_replace())
 ]
 
 ???
 
-We call our universe _moffittverse_.
-
-Very much inspired by the _tidyverse_,
-where a single `library(moffittverse)`
-loads a common set of packages
-that we use for nearly every data request.
+Let's walk through what this code represents step by setup
 
 ---
 class: animated-slide fadeIn
@@ -545,18 +554,20 @@ sample_ind&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_indicators")&lt;br&gt;&lt
 samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(sample_ind,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"SAMPLE_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(patients,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"PERSON_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
-&amp;nbsp;&amp;nbsp;abc_choice_replace()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
-&amp;nbsp;&amp;nbsp;abc_not_deleted()
+&amp;nbsp;&amp;nbsp;abc_not_deleted()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;abc_choice_replace()
 ]
 
 &lt;div class="leader-start-1 animated-slide fadeIn"&gt;Our universe&lt;/div&gt;
 
 ???
 
-Most of the packages are from the tidyverse,
+We call our universe _moffittverse_.
 
-but we also include our own supporting package: `moffittCDS`
-specifically tailored to my team's workflow.
+Very much inspired by the _tidyverse_,
+where a single `library(moffittverse)`
+loads a common set of packages
+that we use for nearly every data request
 
 ---
 
@@ -569,7 +580,7 @@ specifically tailored to my team's workflow.
 .green[✓] fs&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 1.5.0&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;.green[✓] stringr&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;1.4.0&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;br&gt;
 .green[✓] glue&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 1.4.1&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;.green[✓] forcats&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;0.5.0&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;br&gt;
 .green[✓] readr&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;1.3.1&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;.green[✓] lubridate&amp;nbsp;&amp;nbsp;1.7.9&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;br&gt;
-.green[✓] readxl&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 1.3.1&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;.green[✓] moffittCDS 0.1.0
+.green[✓] readxl&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 1.3.1&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;.green[✓] &lt;span class="focus-ul" tabindex="1"&gt;moffittCDS 0.1.0&lt;/span&gt;
 ]&lt;br&gt;&lt;br&gt;
 use_backend("abc")&lt;br&gt;&lt;br&gt;
 samples&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_inventory")&lt;br&gt;
@@ -578,22 +589,22 @@ sample_ind&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_indicators")&lt;br&gt;&lt
 samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(sample_ind,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"SAMPLE_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(patients,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"PERSON_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
-&amp;nbsp;&amp;nbsp;abc_choice_replace()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
-&amp;nbsp;&amp;nbsp;abc_not_deleted()
+&amp;nbsp;&amp;nbsp;abc_not_deleted()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;abc_choice_replace()
 ]
 
 &lt;div class="leader-start-1"&gt;Our universe&lt;/div&gt;
 
 ???
 
+Most of the packages are from the tidyverse,
+
+but we also include our own supporting package:   
+&amp;#x25B6;&amp;#xFE0F; `moffittCDS`   
+specifically tailored to my team's workflow.
+
 This creates a common starting point
 for everyone on the team.
-
-It also gives us a formal "on ramp"
-to install and set up database dependencies
-that we can leverage in specific packages
-to interface with the many back-end systems
-used throughout the cancer and research institutes
 
 ---
 class: animated-slide fadeIn
@@ -607,17 +618,24 @@ sample_ind&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_indicators")&lt;br&gt;&lt
 samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(sample_ind,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"SAMPLE_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(patients,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"PERSON_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
-&amp;nbsp;&amp;nbsp;abc_choice_replace()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
-&amp;nbsp;&amp;nbsp;abc_not_deleted()
+&amp;nbsp;&amp;nbsp;abc_not_deleted()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;abc_choice_replace()
 ]
 
 &lt;div class="leader-start-2 animated-slide fadeIn"&gt;Standardized,&lt;br&gt; managed connections&lt;/div&gt;
 
 ???
 
-This makes connecting to a specific system straightforward...
+It also gives us a formal "on ramp"  
+to install and set up database dependencies  
+that we can leverage in specific packages  
+to interface with our many back-end systems  
 
-use backend...
+This makes connecting to a specific databse straightforward...
+
+you call _use backend_   
+with the name of the database or server  
+that you need to connect to
 
 ---
 class: animated-slide fadeIn
@@ -628,8 +646,8 @@ library(moffittverse)&lt;br&gt;&lt;br&gt;
 .expand-in.h-150px.gray-1.bg-gray-8.ph3[
 .purple[library](DBI)&lt;br&gt;
 .purple[library](dbplyr)&lt;br&gt;
-.b[.purple[library](moffittABC)]&lt;br&gt;
-con &lt;- dbConnect(odbc::odbc(), uid = .green["fiddly"], pwd = .green["details"], ...)
+.purple[library](&lt;span class="focus-ul" tabindex="1"&gt;moffittABC&lt;/span&gt;)&lt;br&gt;
+&lt;span class="focus-ul" tabindex="1"&gt;con &lt;- dbConnect(odbc::odbc(), uid = .green["fiddly"], pwd = .green["details"], ...)&lt;/span&gt;
 ]&lt;br&gt;
 samples&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_inventory")&lt;br&gt;
 patients&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("patient")&lt;br&gt;
@@ -637,24 +655,27 @@ sample_ind&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_indicators")&lt;br&gt;&lt
 samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(sample_ind,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"SAMPLE_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(patients,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"PERSON_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
-&amp;nbsp;&amp;nbsp;abc_choice_replace()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
-&amp;nbsp;&amp;nbsp;abc_not_deleted()
+&amp;nbsp;&amp;nbsp;abc_not_deleted()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;abc_choice_replace()
 ]
 
 &lt;div class="leader-start-2"&gt;Standardized,&lt;br&gt; managed connections&lt;/div&gt;
 
 ???
 
-behind the scenes `use_backend()` loads
-additional packages for connecting with databases
-as well as a back-end specific package,
-`moffittABC`
+and behind the scenes `use_backend()`  
+loads additional packages like `dbplyr`  
+as well as a package specifically for this back-end,  
+&amp;#x25B6;&amp;#xFE0F; `moffittABC`
 
-Each backend package has two primary goals,
-the first is to simplify access.
+Each backend package has two primary goals,  
+the first is to simplify access.  
 
-So by default, moffittABC will manage
-connections to the ABC database
+So by default, moffittABC will not only  
+&amp;#x25B6;&amp;#xFE0F; remember the incancantations required to connect  
+to the ABC database  
+
+but it will actually manage the connection for users internally
 
 ---
 class: animated-slide fadeIn
@@ -669,21 +690,23 @@ use_backend("abc")&lt;br&gt;&lt;br&gt;
 samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(sample_ind,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"SAMPLE_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(patients,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"PERSON_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
-&amp;nbsp;&amp;nbsp;abc_choice_replace()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
-&amp;nbsp;&amp;nbsp;abc_not_deleted()
+&amp;nbsp;&amp;nbsp;abc_not_deleted()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;abc_choice_replace()
 ]
 
 &lt;div class="leader-start-3 animated-slide fadeIn"&gt;Easy schema/table access&lt;/div&gt;
 
 ???
 
-and it also provides easy access to tables.
+and in addition it also provides easy access to tables  
+with functions like `abc_tbl()`.
 
-Here we use the `abc_tbl()` function,
-to connect to table in the ABC schema
-using a global connection managed by the package
+Here we use the `abc_tbl()` function to  
+&amp;#x25B6;&amp;#xFE0F; connect to a table in our database  
+that not at all coincidentally is a table in the ABC schema.  
+And notice that the connection is handled for the user.  
 
-to connect to the three tables we need
+So in this step we connect to the three tables we need...
 
 ---
 
@@ -696,20 +719,21 @@ sample_ind&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_indicators")&lt;br&gt;&lt
 .gray-1[.red.bg-red-8[samples]&amp;nbsp;%&amp;gt;%&amp;nbsp;]&lt;br&gt;
 .leader-end-4.gray-1[&amp;nbsp;&amp;nbsp;left_join(.yellow-1.bg-yellow-8[sample_ind],&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"SAMPLE_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;]&lt;br&gt;
 .gray-1[&amp;nbsp;&amp;nbsp;left_join(.purple.bg-purple-8[patients],&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"PERSON_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;]&lt;br&gt;
-&amp;nbsp;&amp;nbsp;abc_choice_replace()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
-&amp;nbsp;&amp;nbsp;abc_not_deleted()
+&amp;nbsp;&amp;nbsp;abc_not_deleted()&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;abc_choice_replace()
 ]
 
 &lt;div class="leader-start-4 animated-slide fadeIn"&gt;&lt;span class="red"&gt;samples&lt;/span&gt; &lt;span class="orange"&gt;&amp;rarr;&lt;/span&gt; &lt;span class="purple"&gt;patients&lt;/span&gt;&lt;/div&gt;
 
 ???
 
-At this point we've set up our workspace environment,
-and connected to the database and tables we need
+At this point we've set up our workspace and our environment,  
+and connected to the database and tables we need  
 
-... so we can now focus on
-how these tables relate to each other
-so we can link samples to patients
+... so we can now focus on  
+how these tables relate to each other  
+so we can link samples to patients  
+through a series of left joins
 
 ---
 
@@ -722,26 +746,503 @@ sample_ind&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_indicators")&lt;br&gt;&lt
 samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(sample_ind,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"SAMPLE_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 &amp;nbsp;&amp;nbsp;left_join(patients,&amp;nbsp;by&amp;nbsp;=&amp;nbsp;"PERSON_ID")&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
-.gray-1[&amp;nbsp;&amp;nbsp;&lt;span class="focus-ul" tabindex="1"&gt;abc_choice_replace()&lt;/span&gt;&amp;nbsp;%&amp;gt;%&amp;nbsp;]&lt;br&gt;
-.leader-end-5.gray-1[&amp;nbsp;&amp;nbsp;&lt;span class="focus-ul" tabindex="1"&gt;abc_not_deleted()&lt;/span&gt;]
+.gray-1[&amp;nbsp;&amp;nbsp;&lt;span class="focus-ul" tabindex="1"&gt;abc_not_deleted()&lt;/span&gt;&amp;nbsp;%&amp;gt;%&amp;nbsp;]&lt;br&gt;
+.leader-end-5.gray-1[&amp;nbsp;&amp;nbsp;&lt;span class="focus-ul" tabindex="1"&gt;abc_choice_replace()&lt;/span&gt;]
 ]
 
 &lt;div class="leader-start-5 animated-slide fadeIn"&gt;Common, tedious, or error prone&lt;/div&gt;
 
 ???
 
-The final lines speak to the second goal
-of the back-end specific packages
-which is to wrap common, tedious or error-prone
-data base moves into standard functions.
+The final lines speak to the second goal  
+of the back-end specific packages  
+which is to wrap **common, tedious or error-prone**  
+data base moves into standard functions.  
 
-Here we can use the powerful meta-programming tools of R
+Here, because we're working in R,  
+we have a lot more flexibility to write functions,  
+and use tidyselect, tidyeval, and more  
 to do things that would otherwise be very hard to do in SQL, like:
 
-- automatically look up text labels of coded values
-- or apply a "not deleted" filter to all tables used in the query
+- &amp;#x25B6;&amp;#xFE0F; applying a "not deleted" filter to all tables used in the query
+- &amp;#x25B6;&amp;#xFE0F; automatically look up text labels of coded values
+
+---
+template: moffittverse-code-example
+
+???
+
+&amp;#x1F44B;&amp;#x1F44B;&amp;#x1F44B; 
+
+Let's take a step back and reflect on this code as a whole,
+
+it's not that it's fewer lines of code,  
+or less repetition  
+or a question of R vs SQL ...  
+it's that this code does a much better job  
+explaining to humans  
+how the data is being collected and transformed
+
+There are still plenty of assumptions in this code,  
+but as we'll see,  
+because these functions live in R packages  
+they bring a lot of context with them
+
+---
+layout: true
+class: middle
+
+---
 
 
+```r
+#' Replace Coded Choice Values
+#'
+#' Uses `ABC.CHOICE` to replace integers with text labels
+#'
+#' @examples ...
+#' @param x A table in ABC
+#' @export
+abc_choice_replace &lt;- function(x, ...) {
+
+  choice_cols &lt;- choice_column_info(x)
+
+  for (column in choice_cols) {
+    choice_lookup &lt;- get_choices(column)
+    x &lt;- replace_choice(x, column, choice_lookup)
+  }
+
+  x
+}
+```
+
+???
+
+Let's take a look at the source of `abc_choice_replace()` function
+
+---
+
+
+```r
+#' Replace Coded Choice Values
+#'
+#' Uses `ABC.CHOICE` to replace integers with text labels
+#'
+#' @examples ...
+#' @param x A table in ABC
+#' @export
+*abc_choice_replace &lt;- function(x, ...) {
+
+  choice_cols &lt;- choice_column_info(x)
+
+  for (column in choice_cols) {
+    choice_lookup &lt;- get_choices(column)
+    x &lt;- replace_choice(x, column, choice_lookup)
+  }
+
+  x
+}
+```
+
+???
+
+We've already seen how the naming conventions  
+and the functions' API communicate intent:
+
+"...and then we replace choices..."
+
+but on top of that,  
+the function name is chosen to aid discoverability.
+
+in other words,  
+a user can easily find other functions  
+that operate on _choice columns_  
+by exploring autocomplete in RStudio
+
+---
+class: middle
+
+
+```r
+*#' Replace Coded Choice Values
+*#'
+*#' Uses `ABC.CHOICE` to replace integers with text labels
+*#'
+*#' @examples ...
+*#' @param x A table in ABC
+*#' @export
+abc_choice_replace &lt;- function(x, ...) 
+
+  choice_cols &lt;- choice_column_info(x)           
+
+  for (column in choice_cols) {                  
+    choice_lookup &lt;- get_choices(column)         
+    x &lt;- replace_choice(x, column, choice_lookup)
+  }                                              
+
+  x                                              
+}
+```
+
+???
+
+Because this is a function in an R package,  
+we can document **what** the function does and **why**  
+right next to the code...
+
+And the documentation is comfortably available  
+right inside the data analysis environment
+
+--
+
+&lt;img class="absolute w-third bottom-2 right-2 shadow-2 animated fadeInRight" src="figures/function-help.png" /&gt;
+
+---
+
+&lt;img class="absolute w-third bottom-2 right-2 shadow-2 animated fadeOutRight" src="figures/function-help.png" /&gt;
+
+
+```r
+#' Replace Coded Choice Values
+#'
+#' Uses `ABC.CHOICE` to replace integers with text labels
+#'
+#' @examples ...
+#' @param x A table in ABC
+#' @export
+abc_choice_replace &lt;- function(x, ...) {
+
+* choice_cols &lt;- choice_column_info(x)
+*  
+* for (column in choice_cols) {
+*   choice_lookup &lt;- get_choices(column)
+*   x &lt;- replace_choice(x, column, choice_lookup)
+* }
+*  
+* x
+}
+```
+
+???
+
+The body of the function  
+can be considered **technical documentation**  
+recording **how** the function works.
+
+It's more precise than **just a description** of the best practice,  
+and we've learned that  
+when interfacing with more technical teams,  
+the function becomes the **specification**  
+for how we accomplish tasks,  
+which makes it easy to say to engineering:  
+_this is what we do_ or  
+_this is what the new platform needs to support_.
+
+---
+
+
+```r
+#' Replace Coded Choice Values
+#'
+#' Uses `ABC.CHOICE` to replace integers with text labels
+#'
+#' @examples ...
+#' @param x A table in ABC
+#' @export
+abc_choice_replace &lt;- function(x, ...) {
+
+  choice_cols &lt;- choice_column_info(x)          
+  
+  for (column in choice_cols) {                 
+    choice_lookup &lt;- get_choices(column)        
+    x &lt;- replace_choice(x, column, choice_lookup)
+  }                                             
+
+  x                                             
+}
+```
+
+???
+
+So taking a step back,  
+this function isn't **just** about making life easier  
+for someone working with this data...  
+
+it's also a self-contained unit of knowledge  
+
+In this view,  
+an R package isn't just a place to keep code,  
+it's where store best practices  
+or lessons learned  
+and it's how you share that knowledge  
+with others on your team
+
+---
+layout: false
+class: center
+
+&lt;div&gt;&lt;img class="mt4 br2 shadow-5 w-80 animated zoomIn" src="figures/moffittABC-pkgdown.png" /&gt;&lt;/div&gt;
+
+???
+
+In fancy websites! Seriously!
+
+R's tooling for package development  
+is really quite amazing.
+
+Tools like `pkgdown`  
+don't just make your code documentation pretty  
+and browseable  
+and shareable
+
+they make your package documentation  
+a viable knowledge repository  
+and a place to turn   
+when you need to learn something new
+
+
+---
+layout: false
+class: animated slideInRight
+
+&lt;div&gt;&lt;img class="mt4" src="figures/github-issue-create.jpg" /&gt;&lt;/div&gt;
+
+???
+
+On top of this,  
+if you using version control front-ends,  
+like GitHub or GitLab,  
+you also have a public place for sharing knowledge.
+
+Rather than sending emails  
+that are only seen by the people copied in the email,  
+I can open an issue
+
+---
+class: animated fadeIn
+
+&lt;div&gt;&lt;img class="mt4" src="figures/github-issue-answer.jpg" /&gt;&lt;/div&gt;
+
+???
+
+where my question is seen by others,  
+answered publicly,  
+and available for reference in the future..
+
+So I'd like to close with a few practical tips  
+about how to make this happen for your organization and teams
+
+---
+layout: true
+class: bigger highlight-last-item
+
+# Tips
+
+&lt;!-- do: .green[&amp;#x2714;] | don't .red[&amp;#x274C;] --&gt;
+
+---
+
+- .green[&amp;#x2714;] **Do** start small
+
+???
+
+Start small
+
+Start with one team and make their lives better!
+
+I can guarantee that if you look for it  
+you will find a painfully manual process  
+just waiting for a hero like you
+
+---
+
+- .green[&amp;#x2714;] **Do** start small
+
+- .green[&amp;#x2714;] **Do** stay small
+
+???
+
+Stay small
+
+Rather than throwing everything into  
+a big, monolithic package  
+I've had success creating smaller, focused packages
+
+this makes it easy to experiment  
+and to provide targeted solutions  
+
+---
+
+- .green[&amp;#x2714;] **Do** start small
+
+- .green[&amp;#x2714;] **Do** stay small
+
+- .green[&amp;#x2714;] **Do** use vignettes
+
+???
+
+My next tip is to use vignettes.
+
+Vignettes are a great way to document and share  
+processes that aren't easily captured  
+in a single function  
+or even in R code.
+
+For example, 
+I've used vignettes to document  
+database driver setup and configuration  
+or whole-game analysis examples
+
+---
+
+- .green[&amp;#x2714;] **Do** start small
+
+- .green[&amp;#x2714;] **Do** stay small
+
+- .green[&amp;#x2714;] **Do** use vignettes
+
+- .green[&amp;#x2714;] **Do** be opinionated
+
+???
+
+and finally, do be opinionated ...
+
+... okay that came out wrong...
+
+---
+
+- .green[&amp;#x2714;] **Do** start small
+
+- .green[&amp;#x2714;] **Do** stay small
+
+- .green[&amp;#x2714;] **Do** use vignettes
+
+- .green[&amp;#x2714;] **Do** &lt;del&gt;be opinionated&lt;/del&gt; provide a happy path
+
+???
+
+provide a happy path
+
+consider that your users  
+are likely used to a range of workflows  
+so help them fall into a pit of success  
+by making sure the happy path  
+is smooth and as bump-free as possible
+
+---
+layout: true
+class: big highlight-last-item
+
+# Use this
+
+---
+
+- `usethis`, `devtools`, `roxygen2`, `pkgdown`&lt;br&gt;for happy package building
+
+.flex.h-25[
+.w-25[
+![](figures/usethis.png)
+]
+.w-25[
+![](figures/devtools.png)
+]
+.w-25[
+![](figures/roxygen2.png)
+]
+.w-25[
+![](figures/pkgdown.png)
+]
+]
+
+???
+
+None of this would be possible without  
+a slew of packages and resources
+
+key among these are  
+usethis and devtools for package building  
+and roxygen2 and pkgdown for documentation
+
+---
+
+- `usethis`, `devtools`, `roxygen2`, `pkgdown`&lt;br&gt;for happy package building
+
+- .b[R Packages] by Hadley Wickham &amp; Jenny Bryan&lt;br&gt;[r-pkgs.org](https://r-pkgs.org)
+
+.absolute.right-2.bottom-1.w-25[
+![](figures/rpkgs-cover.png)
+]
+
+???
+
+Hadley Wickham and Jenny Bryan's  
+R Packages  
+is a great place to start learning   
+about building R packages
+
+or to turn back to when you get stuck
+
+---
+
+- `usethis`, `devtools`, `roxygen2`, `pkgdown`&lt;br&gt;for happy package building
+
+- .b[R Packages] by Hadley Wickham &amp; Jenny Bryan&lt;br&gt;[r-pkgs.org](https://r-pkgs.org)
+
+
+- `drat` by Dirk Eddelbuettel for internal CRAN-like repos&lt;br&gt;
+  .gray-4[or [.gray-3[RStudio Package Manager]](https://rstudio.com/products/package-manager/)]
+  
+???
+
+We use `drat` by Dirk Eddelbuettel  
+to create an internal CRAN-like package repository  
+and it has made package installation much much better
+
+Another solution is RStudio's package manager
+  
+---
+
+- `usethis`, `devtools`, `roxygen2`, `pkgdown`&lt;br&gt;for happy package building
+
+- .b[R Packages] by Hadley Wickham &amp; Jenny Bryan&lt;br&gt;[r-pkgs.org](https://r-pkgs.org)
+
+
+- `drat` by Dirk Eddelbuettel for internal CRAN-like repos&lt;br&gt;
+  .gray-4[or [.gray-3[RStudio Package Manager]](https://rstudio.com/products/package-manager/)]
+
+- `pkgverse` by Mike Kearney to kickstart your universe&lt;br&gt;
+  [pkgverse.mikewk.com](https://pkgverse.mikewk.com)
+
+???
+
+And finally Mike Kearney's pkgverse template  
+made it easy to pull together  
+our universe of package into a cohesive unit
+
+---
+layout: false
+class: center middle hide-count no-border city-360-bg
+background-color: #FBFCFF;
+
+&lt;div class="city-360-rotate city-360-top z-1"&gt;&lt;/div&gt;
+&lt;div class="city-360-rotate city-360-bottom z-1"&gt;&lt;/div&gt;
+
+.pt5.z-2.animated-slide.lightSpeedIn[
+.blue.f6[Thank you!]&lt;br&gt;
+[.b[build-your-own-universe].netlify.app](https://build-your-own-universe.netlify.app)
+]
+
+.flex.z-9999.relative.animated.fadeInUp.delay-2s.slow[
+.w-40[
+[&amp;commat;travisgerke]()&lt;br&gt;Travis Gerke
+]
+.w-20[
+&amp;nbsp;
+]
+.w-40[
+[&amp;commat;grrrck]()&lt;br&gt;Garrick Aden-Buie
+]
+]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
