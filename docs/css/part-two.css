@@ -1,3 +1,24 @@
+.remark-code-line-highlighted {
+  background-color: #f0f0f0;
+}
+.remark-code-line-highlighted {
+  border-top: 2px solid #ddd;
+  border-left: 2px solid #ddd;
+  border-right: 2px solid #ddd;
+}
+.remark-code-line-highlighted + .remark-code-line-highlighted {
+  border-top: none;
+  border-bottom: none;
+}
+.remark-code-line-highlighted:last-of-type {
+  border-bottom: 2px solid #ddd;
+}
+.remark-code-line-highlighted + div {
+  border-top: 2px solid #aaa;
+}
+pre code.remark-code.hljs {
+  background: white;
+}
 /*! ---- thought bubble ---- */
 .bubble p {
   position: relative;
@@ -218,7 +239,6 @@
 }
 .code-two-column pre {
   margin-top: 0;
-  background-color: #fafafa;
   padding-left: 1em;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px
@@ -270,6 +290,17 @@
   font-family: sans-serif;
   max-width: 100%;
   overflow-x: hidden
+}
+.word-doc pre code.sql .remark-code-line:hover {
+  font-weight: normal;
+}
+
+.word-doc pre code.sql .remark-code-line:hover:before {
+  content: none;
+  color: #6d7e8a;
+  position: absolute;
+  transform: none;
+  animation: none;
 }
 #sql-font-size-down {
   background: 0 0;
