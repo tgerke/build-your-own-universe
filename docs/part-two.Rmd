@@ -897,7 +897,7 @@ with others on your team
 layout: false
 class: center
 
-<div><img class="mt4 br2 shadow-5 w-80 animated zoomIn" src="figures/moffittABC-pkgdown.png" /></div>
+<div><img class="mt4 br2 shadow-5 w-80 animated slideInDown" src="figures/moffittABC-pkgdown.png" /></div>
 
 ???
 
