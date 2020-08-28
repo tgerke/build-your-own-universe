@@ -2,8 +2,8 @@
 title: "Build your own universe"
 subtitle: "Scale high-quality research data provisioning with R packages"
 author: 
-  - Travis Gerke
-  - Garrick Aden-Buie
+  - .b[Travis Gerke] .gray-2[&commat;travisgerke]
+  - .b[Garrick Aden-Buie]  .gray-2[&commat;grrrck]
 institute: ".small[.blue-medium[Moffitt Cancer Center]]"
 date: 'August 28, 2020'
 output:
