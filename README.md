@@ -8,7 +8,7 @@ Travis Gerke &#38; Garrick Aden-Buie
 
 This is a 20-minute talk most recently given at [R/Medicine 2020](https://events.linuxfoundation.org/r-medicine/).
 
-&#x1F4FA; [View slides][slides]
+&#x1F4FA; [View slides][slides] (best viewed in Firefox!)
 
 &#x1F3A5; [Watch recording][recording]
 
