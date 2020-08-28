@@ -71,13 +71,13 @@ How do I connect our .blue.b[tissue sample] inventory to a .orange.b[patient's c
 
 ???
 
-It starts with a question.  
-I want to connect our tissue sample inventory  
+It starts with a question.
+I want to connect our tissue sample inventory
 to patient clinical data.
 
-It's not something I've done before,  
-so I'm not quite sure how to access the samples table  
-or how to link a sample to a patient  
+It's not something I've done before,
+so I'm not quite sure how to access the samples table
+or how to link a sample to a patient
 but obviously it has to be possible.
 
 So how do I get started?
@@ -90,15 +90,15 @@ background-position: center right
 
 ???
 
-If you believe the big data stock photos,  
-I go to the self-service data wall  
+If you believe the big data stock photos,
+I go to the self-service data wall
 and point at the numbers I want.
 
 ---
 
 .ba.b--gray-4.br2.pv2.ph3.mv5.shadow-4.animated.fadeIn[
 .b[Aden-Buie, Garrick]&lt;br&gt;
-Question about Sample Availability Table  
+Question about Sample Availability Table
 
 To: .gray-3[data-ops@acmemed.org]
 
@@ -127,7 +127,7 @@ to see what they can tell me...
 
 .ba.b--gray-4.br2.pv2.ph3.mv5.shadow-4[
 .b[Aden-Buie, Garrick]&lt;br&gt;
-Question about Sample Availability Table  
+Question about Sample Availability Table
 
 To: .gray-3[data-ops@acmemed.org]
 
@@ -149,7 +149,7 @@ Thanks!
 
 .w-90.ba.b--gray-4.br2.pv2.ph3.mv5.shadow-4.absolute.animated.lightSpeedOut[
 .b[Aden-Buie, Garrick]&lt;br&gt;
-Question about Sample Availability Table  
+Question about Sample Availability Table
 
 To: .gray-3[data-ops@acmemed.org]
 
@@ -166,7 +166,7 @@ Thanks!
 
 .ba.b--gray-4.br2.pv2.ph3.mv5.shadow-4.relative.animated.bounceInDown.delay-2s[
 .b[Friendly Data Ops Person]&lt;br&gt;
-RE: Question about Sample Availability Table  
+RE: Question about Sample Availability Table
 &lt;div class="w1 absolute right-2 gray-1" id="email-attachment"&gt;
 &lt;svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="file-code" class="svg-inline--fa fa-file-code fa-w-12" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"&gt;&lt;path fill="currentColor" d="M149.9 349.1l-.2-.2-32.8-28.9 32.8-28.9c3.6-3.2 4-8.8.8-12.4l-.2-.2-17.4-18.6c-3.4-3.6-9-3.7-12.4-.4l-57.7 54.1c-3.7 3.5-3.7 9.4 0 12.8l57.7 54.1c1.6 1.5 3.8 2.4 6 2.4 2.4 0 4.8-1 6.4-2.8l17.4-18.6c3.3-3.5 3.1-9.1-.4-12.4zm220-251.2L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM256 51.9l76.1 76.1H256zM336 464H48V48h160v104c0 13.3 10.7 24 24 24h104zM209.6 214c-4.7-1.4-9.5 1.3-10.9 6L144 408.1c-1.4 4.7 1.3 9.6 6 10.9l24.4 7.1c4.7 1.4 9.6-1.4 10.9-6L240 231.9c1.4-4.7-1.3-9.6-6-10.9zm24.5 76.9l.2.2 32.8 28.9-32.8 28.9c-3.6 3.2-4 8.8-.8 12.4l.2.2 17.4 18.6c3.3 3.5 8.9 3.7 12.4.4l57.7-54.1c3.7-3.5 3.7-9.4 0-12.8l-57.7-54.1c-3.5-3.3-9.1-3.2-12.4.4l-17.4 18.6c-3.3 3.5-3.1 9.1.4 12.4z"&gt;&lt;/path&gt;&lt;/svg&gt;
 &lt;/div&gt;
@@ -193,6 +193,9 @@ _read email_
 And look, the email came with an attachment that I can open up.
 
 ---
+name: sql-example
+
+&lt;pre id="sql-magnifier"&gt;&lt;code class="sql hljs remark-code"&gt;&lt;div class="remark-code-line"&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 .code-two-column.shadow-4.animated.zoomIn[
 &lt;div class="code code-window-title-bar ph2 mb0 pv1 mt5 small bg-gray-4 gray-1 center relative"&gt;
@@ -205,7 +208,7 @@ sample-inventory-patient.sql
 
 ```sql
 SELECT SA.PERSON_ID,SA.SAMPLE_ID,SA.SAMPLE_FAMILY_ID
-,CH1.CHOICE_NAME AS COLLECTION_CONSORTIUM 
+,CH1.CHOICE_NAME AS COLLECTION_CONSORTIUM
 ,CH2.CHOICE_NAME AS CELFILE_RELATED
 ,CH3.CHOICE_NAME AS FROZEN_TUMOR_TISSUE
 ,CH4.CHOICE_NAME AS FROZEN_NORMAL_TISSUE
@@ -249,7 +252,7 @@ SELECT SA.PERSON_ID,SA.SAMPLE_ID,SA.SAMPLE_FAMILY_ID
 FROM ABC.SAMPLE SA
 LEFT JOIN ABC.CHOICE CH1 ON SA.COLLECTION_FACILITY = CH1.CHOICE_ID
 LEFT JOIN ABC.CHOICE CH2 ON SA.CELFILE_RELATED = CH2.CHOICE_ID
-LEFT JOIN ABC.PATIENT_INFO PI ON SA.PERSON_ID = PI.PERSON_ID
+LEFT JOIN ABC.PATIENT PI ON SA.PERSON_ID = PI.PERSON_ID
 LEFT JOIN ABC.SAMPLE_INDICATOR SI ON SA.SAMPLE_KEY = SI.SAMPLE_KEY
 LEFT JOIN ABC.CHOICE CH3 ON SI.FROZ_TTISE_AVL_FOR_RIND = CH3.CHOICE_ID
 LEFT JOIN ABC.CHOICE CH4 ON SI.FROZ_NORM_TISS_AVL_FOR_RIND = CH4.CHOICE_ID
@@ -269,7 +272,7 @@ LEFT JOIN ABC.CHOICE CH17 ON SA.DERIVED_SOO_CATEGORY = CH17.CHOICE_ID
 LEFT JOIN ABC.CHOICE CH18 ON SA.DERIVED_SOO_TISSUE_TYPE = CH18.CHOICE_ID
 LEFT JOIN ABC.CHOICE CH19 ON SA.HISTOLOGY_TYPE_CONFORMED_CAP = CH19.CHOICE_ID
 LEFT JOIN ABC.CHOICE CH20 ON SA.DERIVED_PRIMARY_VS_METASTATIC = CH20.CHOICE_ID
-LEFT JOIN ABC.TISSUE_TYPE CH21 
+LEFT JOIN ABC.TISSUE_TYPE CH21
   ON SUBSTR(SA.DERIVED_SOO_ANATOMIC_SITE,0,8) = CH21.TISSUE_TYPE_KEY
 LEFT JOIN ABC.CHOICE CH22 ON SA.DERIVED_GROSS_DIAGNOSIS = CH22.CHOICE_ID
 LEFT JOIN ABC.CHOICE CH23 ON SA.PRIMARY_SITE_PATIENT = CH23.CHOICE_ID
@@ -296,6 +299,11 @@ And I'm immediately hit with a wall of sequel.
 
 This query doesn't look pretty but in a couple hours I'll probably get the gist of it...
 
+Like that it uses the `sample`, `sample_indicator`
+and `patient` tables
+
+and that these lines are for
+
 And hey, it's at least code, right?
 
 Well... since we're emailing files around, sometimes you'll get a query like this
@@ -311,7 +319,7 @@ class: no-logo no-border hide-count word-doc animated-slide slideInRight boingOu
 
 ```sql
 SELECT SA.PERSON_ID,SA.SAMPLE_ID,SA.SAMPLE_FAMILY_ID
-,CH1.CHOICE_NAME AS COLLECTION_CONSORTIUM 
+,CH1.CHOICE_NAME AS COLLECTION_CONSORTIUM
 ,CH2.CHOICE_NAME AS CELFILE_RELATED
 ,CH3.CHOICE_NAME AS FROZEN_TUMOR_TISSUE
 ,CH4.CHOICE_NAME AS FROZEN_NORMAL_TISSUE
@@ -355,7 +363,7 @@ SELECT SA.PERSON_ID,SA.SAMPLE_ID,SA.SAMPLE_FAMILY_ID
 FROM ABC.SAMPLE SA
 LEFT JOIN ABC.CHOICE CH1 ON SA.COLLECTION_FACILITY = CH1.CHOICE_ID
 LEFT JOIN ABC.CHOICE CH2 ON SA.CELFILE_RELATED = CH2.CHOICE_ID
-LEFT JOIN ABC.PATIENT_INFO PI ON SA.PERSON_ID = PI.PERSON_ID
+LEFT JOIN ABC.PATIENT PI ON SA.PERSON_ID = PI.PERSON_ID
 LEFT JOIN ABC.SAMPLE_INDICATOR SI ON SA.SAMPLE_KEY = SI.SAMPLE_KEY
 LEFT JOIN ABC.CHOICE CH3 ON SI.FROZ_TTISE_AVL_FOR_RIND = CH3.CHOICE_ID
 LEFT JOIN ABC.CHOICE CH4 ON SI.FROZ_NORM_TISS_AVL_FOR_RIND = CH4.CHOICE_ID
@@ -375,7 +383,7 @@ LEFT JOIN ABC.CHOICE CH17 ON SA.DERIVED_SOO_CATEGORY = CH17.CHOICE_ID
 LEFT JOIN ABC.CHOICE CH18 ON SA.DERIVED_SOO_TISSUE_TYPE = CH18.CHOICE_ID
 LEFT JOIN ABC.CHOICE CH19 ON SA.HISTOLOGY_TYPE_CONFORMED_CAP = CH19.CHOICE_ID
 LEFT JOIN ABC.CHOICE CH20 ON SA.DERIVED_PRIMARY_VS_METASTATIC = CH20.CHOICE_ID
-LEFT JOIN ABC.TISSUE_TYPE CH21 
+LEFT JOIN ABC.TISSUE_TYPE CH21
   ON SUBSTR(SA.DERIVED_SOO_ANATOMIC_SITE,0,8) = CH21.TISSUE_TYPE_KEY
 LEFT JOIN ABC.CHOICE CH22 ON SA.DERIVED_GROSS_DIAGNOSIS = CH22.CHOICE_ID
 LEFT JOIN ABC.CHOICE CH23 ON SA.PRIMARY_SITE_PATIENT = CH23.CHOICE_ID
@@ -440,9 +448,9 @@ class: middle
 
 for example, dplyr
 
-whose API is very intentionally designed  
-in line with the philopsophy that code is  
-written for people to read  
+whose API is very intentionally designed
+in line with the philopsophy that code is
+written for people to read
 and only incidentally for machines to execute
 
 Which reminds me of a great quote from Jenny Bryan...
@@ -475,7 +483,7 @@ It doesn't have to be you.
 
 ???
 
-Let's take a look at what this query might look like  
+Let's take a look at what this query might look like
 in an alternate universe...
 
 ---
@@ -496,8 +504,8 @@ samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 
 ???
 
-Here's the same query,  
-rewritten using a blend of `dplyr`  
+Here's the same query,
+rewritten using a blend of `dplyr`
 and custom functions that support our particular setup
 
 ---
@@ -520,9 +528,9 @@ samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 
 We call our universe _moffittverse_.
 
-Very much inspired by the _tidyverse_,  
-where a single `library(moffittverse)`  
-loads a common set of packages  
+Very much inspired by the _tidyverse_,
+where a single `library(moffittverse)`
+loads a common set of packages
 that we use for nearly every data request.
 
 ---
@@ -547,7 +555,7 @@ samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 
 Most of the packages are from the tidyverse,
 
-but we also include our own supporting package: `moffittCDS`  
+but we also include our own supporting package: `moffittCDS`
 specifically tailored to my team's workflow.
 
 ---
@@ -578,13 +586,13 @@ samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 
 ???
 
-This creates a common starting point  
+This creates a common starting point
 for everyone on the team.
 
-It also gives us a formal "on ramp"  
+It also gives us a formal "on ramp"
 to install and set up database dependencies
-that we can leverage in specific packages  
-to interface with the many back-end systems  
+that we can leverage in specific packages
+to interface with the many back-end systems
 used throughout the cancer and research institutes
 
 ---
@@ -637,15 +645,15 @@ samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 
 ???
 
-behind the scenes `use_backend()` loads  
-additional packages for connecting with databases  
-as well as a back-end specific package,  
+behind the scenes `use_backend()` loads
+additional packages for connecting with databases
+as well as a back-end specific package,
 `moffittABC`
 
-Each backend package has two primary goals,  
+Each backend package has two primary goals,
 the first is to simplify access.
 
-So by default, moffittABC will manage  
+So by default, moffittABC will manage
 connections to the ABC database
 
 ---
@@ -671,9 +679,9 @@ samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 
 and it also provides easy access to tables.
 
-Here we use the `abc_tbl()` function,  
-to connect to table in the ABC schema  
-using a global connection managed by the package  
+Here we use the `abc_tbl()` function,
+to connect to table in the ABC schema
+using a global connection managed by the package
 
 to connect to the three tables we need
 
@@ -696,11 +704,11 @@ sample_ind&amp;nbsp;&amp;lt;-&amp;nbsp;abc_tbl("sample_indicators")&lt;br&gt;&lt
 
 ???
 
-At this point we've set up our workspace environment,  
-and connected to the database and tables we need  
+At this point we've set up our workspace environment,
+and connected to the database and tables we need
 
-... so we can now focus on  
-how these tables relate to each other  
+... so we can now focus on
+how these tables relate to each other
 so we can link samples to patients
 
 ---
@@ -722,16 +730,18 @@ samples&amp;nbsp;%&amp;gt;%&amp;nbsp;&lt;br&gt;
 
 ???
 
-The final lines speak to the second goal  
-of the back-end specific packages  
-which is to wrap common, tedious or error-prone  
+The final lines speak to the second goal
+of the back-end specific packages
+which is to wrap common, tedious or error-prone
 data base moves into standard functions.
 
-Here we can use the powerful metaprogramming tools of R  
-to completely abstract what would otherwise be hundreds of lines of SQL, e.g:
+Here we can use the powerful meta-programming tools of R
+to do things that would otherwise be very hard to do in SQL, like:
 
 - automatically look up text labels of coded values
 - or apply a "not deleted" filter to all tables used in the query
+
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

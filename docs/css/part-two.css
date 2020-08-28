@@ -238,6 +238,19 @@
   left: 12px;
   top: 11px
 }
+#sql-magnifier {
+	position: absolute;
+	width: 90%;
+	font-size: 1em;
+  top: 20px;
+}
+#sql-magnifier .hljs {
+	background-color: white;
+	height: 60px;
+}
+.code-two-column pre {
+  cursor: url(../figures/magnifying-glass.cur), zoom-in;
+}
 /*! ---- ms word ---- */
 .word-doc {
   background-image: url(../figures/word-doc.png);

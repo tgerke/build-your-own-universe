@@ -26,6 +26,19 @@
     })
   }
 
+  function sqlMagnifier () {
+    const sqlMagnifier = document.getElementById('sql-magnifier')
+    const sqlCode = document.querySelector('.code-two-column pre code.sql')
+    sqlCode.addEventListener('mouseover', function(ev) {
+      if (ev.target.classList.contains('remark-code-line')) {
+        sqlMagnifier.innerHTML = ev.target.outerHTML
+      }
+    })
+    sqlCode.addEventListener('mouseleave', function() {
+      sqlMagnifier.innerHTML = ''
+    })
+  }
+
   function wordButtons () {
     const btnDown = document.getElementById('sql-font-size-down')
     const btnUp = document.getElementById('sql-font-size-up')
@@ -135,6 +148,7 @@
   }
 
   ready(emailAttachment)
+  ready(sqlMagnifier)
   ready(wordButtons)
   ready(initStyleClickers)
   ready(initializeLeaderLines)
