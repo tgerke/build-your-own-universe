@@ -23,7 +23,6 @@
     <textarea id="source">
 
 
-
 class: left middle blueprint2
 
 
@@ -930,33 +929,320 @@ The body of the function
 can be considered **technical documentation**  
 recording **how** the function works.
 
-It's more precise than just a description of the best practice,  
+It's more precise than **just a description** of the best practice,  
 and we've learned that  
 when interfacing with more technical teams,  
-the function becomes the _specification_  
+the function becomes the **specification**  
 for how we accomplish tasks,  
 which makes it easy to say to engineering:  
 _this is what we do_ or  
 _this is what the new platform needs to support_.
 
 ---
+
+
+```r
+#' Replace Coded Choice Values
+#'
+#' Uses `ABC.CHOICE` to replace integers with text labels
+#'
+#' @examples ...
+#' @param x A table in ABC
+#' @export
+abc_choice_replace &lt;- function(x, ...) {
+
+  choice_cols &lt;- choice_column_info(x)          
+  
+  for (column in choice_cols) {                 
+    choice_lookup &lt;- get_choices(column)        
+    x &lt;- replace_choice(x, column, choice_lookup)
+  }                                             
+
+  x                                             
+}
+```
+
+???
+
+So taking a step back,  
+this function isn't **just** about making life easier  
+for someone working with this data...  
+
+it's also a self-contained unit of knowledge  
+
+In this view,  
+an R package isn't just a place to keep code,  
+it's where store best practices  
+or lessons learned  
+and it's how you share that knowledge  
+with others on your team
+
+---
 layout: false
+class: center
 
-&lt;div&gt;&lt;img src="figures/github-issue-create.jpg" /&gt;&lt;/div&gt;
+&lt;div&gt;&lt;img class="mt4 br2 shadow-5 w-80 animated zoomIn" src="figures/moffittABC-pkgdown.png" /&gt;&lt;/div&gt;
+
+???
+
+In fancy websites! Seriously!
+
+R's tooling for package development  
+is really quite amazing.
+
+Tools like `pkgdown`  
+don't just make your code documentation pretty  
+and browseable  
+and shareable
+
+they make your package documentation  
+a viable knowledge repository  
+and a place to turn   
+when you need to learn something new
+
+
+---
+layout: false
+class: animated slideInRight
+
+&lt;div&gt;&lt;img class="mt4" src="figures/github-issue-create.jpg" /&gt;&lt;/div&gt;
+
+???
+
+On top of this,  
+if you using version control front-ends,  
+like GitHub or GitLab,  
+you also have a public place for sharing knowledge.
+
+Rather than sending emails  
+that are only seen by the people copied in the email,  
+I can open an issue
+
+---
+class: animated fadeIn
+
+&lt;div&gt;&lt;img class="mt4" src="figures/github-issue-answer.jpg" /&gt;&lt;/div&gt;
+
+???
+
+where my question is seen by others,  
+answered publicly,  
+and available for reference in the future..
+
+So I'd like to close with a few practical tips  
+about how to make this happen for your organization and teams
+
+---
+layout: true
+class: bigger highlight-last-item
+
+# Tips
+
+&lt;!-- do: .green[&amp;#x2714;] | don't .red[&amp;#x274C;] --&gt;
 
 ---
 
-&lt;div&gt;&lt;img src="figures/github-issue-answer.jpg" /&gt;&lt;/div&gt;
+- .green[&amp;#x2714;] **Do** start small
+
+???
+
+Start small
+
+Start with one team and make their lives better!
+
+I can guarantee that if you look for it  
+you will find a painfully manual process  
+just waiting for a hero like you
 
 ---
-class: big
 
-## Tips
+- .green[&amp;#x2714;] **Do** start small
 
-- .green[&amp;#x2714;] **Do** 
+- .green[&amp;#x2714;] **Do** stay small
 
-- .red[&amp;#x274C;] **Don't**
+???
 
+Stay small
+
+Rather than throwing everything into  
+a big, monolithic package  
+I've had success creating smaller, focused packages
+
+this makes it easy to experiment  
+and to provide targeted solutions  
+
+---
+
+- .green[&amp;#x2714;] **Do** start small
+
+- .green[&amp;#x2714;] **Do** stay small
+
+- .green[&amp;#x2714;] **Do** use vignettes
+
+???
+
+My next tip is to use vignettes.
+
+Vignettes are a great way to document and share  
+processes that aren't easily captured  
+in a single function  
+or even in R code.
+
+For example, 
+I've used vignettes to document  
+database driver setup and configuration  
+or whole-game analysis examples
+
+---
+
+- .green[&amp;#x2714;] **Do** start small
+
+- .green[&amp;#x2714;] **Do** stay small
+
+- .green[&amp;#x2714;] **Do** use vignettes
+
+- .green[&amp;#x2714;] **Do** be opinionated
+
+???
+
+and finally, do be opinionated ...
+
+... okay that came out wrong...
+
+---
+
+- .green[&amp;#x2714;] **Do** start small
+
+- .green[&amp;#x2714;] **Do** stay small
+
+- .green[&amp;#x2714;] **Do** use vignettes
+
+- .green[&amp;#x2714;] **Do** &lt;del&gt;be opinionated&lt;/del&gt; provide a happy path
+
+???
+
+provide a happy path
+
+consider that your users  
+are likely used to a range of workflows  
+so help them fall into a pit of success  
+by making sure the happy path  
+is smooth and as bump-free as possible
+
+---
+layout: true
+class: big highlight-last-item
+
+# Use this
+
+---
+
+- `usethis`, `devtools`, `roxygen2`, `pkgdown`&lt;br&gt;for happy package building
+
+.flex.h-25[
+.w-25[
+![](figures/usethis.png)
+]
+.w-25[
+![](figures/devtools.png)
+]
+.w-25[
+![](figures/roxygen2.png)
+]
+.w-25[
+![](figures/pkgdown.png)
+]
+]
+
+???
+
+None of this would be possible without  
+a slew of packages and resources
+
+key among these are  
+usethis and devtools for package building  
+and roxygen2 and pkgdown for documentation
+
+---
+
+- `usethis`, `devtools`, `roxygen2`, `pkgdown`&lt;br&gt;for happy package building
+
+- .b[R Packages] by Hadley Wickham &amp; Jenny Bryan&lt;br&gt;[r-pkgs.org](https://r-pkgs.org)
+
+.absolute.right-2.bottom-1.w-25[
+![](figures/rpkgs-cover.png)
+]
+
+???
+
+Hadley Wickham and Jenny Bryan's  
+R Packages  
+is a great place to start learning   
+about building R packages
+
+or to turn back to when you get stuck
+
+---
+
+- `usethis`, `devtools`, `roxygen2`, `pkgdown`&lt;br&gt;for happy package building
+
+- .b[R Packages] by Hadley Wickham &amp; Jenny Bryan&lt;br&gt;[r-pkgs.org](https://r-pkgs.org)
+
+
+- `drat` by Dirk Eddelbuettel for internal CRAN-like repos&lt;br&gt;
+  .gray-4[or [.gray-3[RStudio Package Manager]](https://rstudio.com/products/package-manager/)]
+  
+???
+
+We use `drat` by Dirk Eddelbuettel  
+to create an internal CRAN-like package repository  
+and it has made package installation much much better
+
+Another solution is RStudio's package manager
+  
+---
+
+- `usethis`, `devtools`, `roxygen2`, `pkgdown`&lt;br&gt;for happy package building
+
+- .b[R Packages] by Hadley Wickham &amp; Jenny Bryan&lt;br&gt;[r-pkgs.org](https://r-pkgs.org)
+
+
+- `drat` by Dirk Eddelbuettel for internal CRAN-like repos&lt;br&gt;
+  .gray-4[or [.gray-3[RStudio Package Manager]](https://rstudio.com/products/package-manager/)]
+
+- `pkgverse` by Mike Kearney to kickstart your universe&lt;br&gt;
+  [pkgverse.mikewk.com](https://pkgverse.mikewk.com)
+
+???
+
+And finally Mike Kearney's pkgverse template  
+made it easy to pull together  
+our universe of package into a cohesive unit
+
+---
+layout: false
+class: center middle hide-count no-border city-360-bg
+background-color: #FBFCFF;
+
+&lt;div class="city-360-rotate city-360-top z-1"&gt;&lt;/div&gt;
+&lt;div class="city-360-rotate city-360-bottom z-1"&gt;&lt;/div&gt;
+
+.pt5.z-2.animated-slide.lightSpeedIn[
+.blue.f6[Thank you!]&lt;br&gt;
+[.b[build-your-own-universe].netlify.app](https://build-your-own-universe.netlify.app)
+]
+
+.flex.z-9999.relative.animated.fadeInUp.delay-2s.slow[
+.w-40[
+[&amp;commat;travisgerke]()&lt;br&gt;Travis Gerke
+]
+.w-20[
+&amp;nbsp;
+]
+.w-40[
+[&amp;commat;grrrck]()&lt;br&gt;Garrick Aden-Buie
+]
+]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
