@@ -17,6 +17,7 @@ htmltools::tagList(
   xaringanExtra::use_animate_css(TRUE, xaringan = FALSE),
   xaringanExtra::use_tile_view(),
   xaringanExtra::use_extra_styles(hover_code_line = TRUE, mute_unhighlighted_code = TRUE),
+  xaringanExtra::use_share_again(),
   meta() %>%
     meta_general(
       description = "Build your own universe: Scale high-quality research data provisioning with R packages",
