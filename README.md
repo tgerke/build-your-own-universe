@@ -1,7 +1,10 @@
 ## Build your own universe
+
+![](https://github.com/tgerke/build-your-own-universe/raw/master/docs/social-card.png)
+
 ### Scale high-quality research data provisioning with R packages
 
-[slides]: https://tgerke.github.io/build-your-own-universe/
+[slides]: https://build-your-own-universe.netlify.app/
 [recording]: https://events.linuxfoundation.org/r-medicine/
 
 Travis Gerke &#38; Garrick Aden-Buie
