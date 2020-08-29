@@ -78,6 +78,9 @@ To orient you to the origin of this talk, where Garrick and I are coming from, a
 ---
 class: hide-count no-logo no-border bg-black
 
+---
+class: hide-count no-logo no-border bg-black
+
 <div class="carina-nebula fullscreen-blur-fade-in"></div>
 
 ???
@@ -311,7 +314,7 @@ by scaling .b.em.red[people]
 ]
 
 .absolute.bottom-1.right-1[
-[...continued in part 2](part-two.html)
+
 ]
 
 ???
@@ -321,12 +324,6 @@ Taken together, this is our first hint that scaling data provisioning isn't just
 class: left middle blueprint2
 
 .f4[
-Scaling .blue[provisioning]<br>
-by scaling .red[people]<br>
-... by scaling .green[access]
+[...continued in part 2 &rarr;](part-two.html)
 ]
 
-
-???
-
-I'm going to start with an entirely hypothetical but familiar story...
