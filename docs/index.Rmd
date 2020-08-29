@@ -252,6 +252,9 @@ class: hide-count no-logo no-border bg-black carina-nebula-soft fullscreen
 <div class="world-label world-label-dqs white">Data<br>Quality</div>
 
 <div class="rocket rocket-entrance"></div>
+<div class="rocket rocket-entrance no-offset-path">
+  <h1>Garbage text only in incompatible browsers!!!</h1>
+</div>
 
 ???
 Now, with so many teams completing data-related operations at a rapid pace, we needed a shuttlecraft to coordinate technology strategy, inform general data governance, and mine valuable software ore from the astRoid belt
