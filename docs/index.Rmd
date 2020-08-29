@@ -14,6 +14,8 @@ output:
       - css/moffitt-xaringan-extra.css
       - css/talk-base.css
       - css/build-your-universe.min.css
+    includes:
+      in_header: head-part-one.html
     seal: false
     nature:
       titleSlideClass: ["bottom", "left"]
