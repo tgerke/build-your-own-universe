@@ -5,11 +5,12 @@
 ### Scale high-quality research data provisioning with R packages
 
 [slides]: https://build-your-own-universe.netlify.app/
-[recording]: https://events.linuxfoundation.org/r-medicine/
+[r-med]: https://events.linuxfoundation.org/r-medicine/
+[recording]: https://youtu.be/lm0QYr1C2Sw?list=PL4IzsxWztPdljYo7uE5G_R2PtYw3fUReo
 
 Travis Gerke &#38; Garrick Aden-Buie
 
-This is a 20-minute talk most recently given at [R/Medicine 2020](https://events.linuxfoundation.org/r-medicine/).
+This is a 20-minute talk most recently given at [R/Medicine 2020][r-med].
 
 &#x1F4FA; [View slides][slides] (best viewed in Firefox!)
 
